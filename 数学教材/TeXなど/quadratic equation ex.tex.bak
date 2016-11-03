@@ -1,0 +1,52 @@
+\documentclass[11pt,a4paper]{jsarticle}
+
+\usepackage[top=30truemm,bottom=30truemm,left=20truemm,right=15truemm]{geometry}
+
+%
+\usepackage{amsmath,amssymb}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{ascmac}
+\usepackage{fancybox,ascmac}
+\usepackage{amsthm}
+%
+
+\addtolength{\textheight}{\topskip}
+\setlength{\voffset}{-0.5in}
+\setlength{\headsep}{0.3in}
+
+
+
+%
+\newcommand{\divergence}{\mathrm{div}\,}  %ダイバージェンス
+\newcommand{\grad}{\mathrm{grad}\,}  %グラディエント
+\newcommand{\rot}{\mathrm{rot}\,}  %ローテーション
+%
+%\pagestyle{myheadings}
+\pagestyle{empty}
+
+\begin{document}
+
+\section{二次方程式の解法}
+\subsection{問題}
+二次方程式$ax^2 + bx +c = 0 \hspace{3mm} (a \not= 0)$の解は以下の式で与えられることを示せ．
+\begin{eqnarray*}
+x  &=& \frac{-b \pm \sqrt{\mathstrut b^2-4ac}}{2a}
+\end{eqnarray*}
+\subsection{証明}
+以下の式はすべて同値．
+\begin{eqnarray*}
+2x^2 + 3x - 7 &=& 0  \\
+2 \Bigl(x^2 + \frac{3}{2}x \Bigl) -7 &=& 0 \\
+2 \Bigl\{ \Bigl(x +\frac{3}{4}\Bigl)^2 - \Bigl(\frac{3}{4}\Bigl)^2\Bigl\} -7 &=& 0 \\
+2 \Bigl(x +\frac{3}{4}\Bigl)^2 - \frac{9}{8} -7 &=& 0 \\
+2 \Bigl(x +\frac{3}{4}\Bigl)^2  &=& \frac{9}{8} -7 \\
+2 \Bigl(x +\frac{3}{4}\Bigl)^2  &=& \frac{9+56}{8} \\
+\Bigl(x +\frac{3}{4}\Bigl)^2  &=& \frac{65}{4} \\
+x +\frac{3}{4}  &=& \pm \sqrt{\mathstrut \frac{65}{16} }  \\
+x  &=& -\frac{3}{4} \pm \frac{\sqrt{\mathstrut 65}}{4} \\
+x  &=& \frac{-3 \pm \sqrt{\mathstrut 65}}{4}　\qed
+\end{eqnarray*}
+
+
+\end{document}

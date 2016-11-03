@@ -1,0 +1,439 @@
+﻿----------リスト9-1
+<body onload="init();">
+  <script type="text/javascript">
+  var global_val = "これはグローバル変数の値です。";
+
+  function init(){
+    var dom = document.querySelector("#msg");
+    dom.textContent = window.global_val;
+  }
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div role="main">
+    <p id="msg">this is sample page.</p>
+  </div>
+</body>
+
+----------リスト9-2
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    var inW = window.innerWidth;
+    var inH = window.innerHeight;
+    var outW = window.outerWidth;
+    var outH = window.outerHeight;
+    var scX = window.screenX;
+    var scY = window.screenY;
+    var pgX = window.pageXOffset;
+    var pgY = window.pageYOffset;
+    var dom = document.querySelector("#msg");
+    dom.innerHTML = "<pre>" +
+      "INNER-WIDTH:  " + inW + "<br>" +
+      "INNER-HEIGHT: " + inH + "<br>" +
+      "OUTER-WIDTH:  " + outW + "<br>" +
+      "OUTER-HEIGHT: " + outH + "<br>" +
+      "SCREEN-LEFT:  " + scX + "<br>" +
+      "SCREEN-TOP:   " + scY + "<br>" +
+      "PAGE-XOFFSET: " + pgX + "<br>" +
+      "PAGE-YOFFSET: " + pgY + "<br>" +
+      "</pre>";
+  }
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div role="main">
+    <p id="msg">this is sample page.</p>
+  </div>
+</body>
+
+----------リスト9-3
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    document.body.
+      addEventListener("click",func);
+  }
+  function func(){
+    var x = window.screenX;
+    var y = window.screenY;
+    window.moveTo(x + 25,y + 25);
+    window.scrollBy(0,25);
+  }
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div role="main">
+    <p id="msg">this is sample page.</p>
+    <ol>
+    <li>scroll</li>
+
+    ……適当に<li>タグを追記……
+
+    <li>scroll</li>
+    </ol>
+  </div>
+</body>
+
+----------リスト9-4
+var docCookies = {
+  getItem: function (sKey) {
+    if (!sKey || !this.hasItem(sKey)) { return null; }
+    return unescape(
+  document.cookie.replace(
+    new RegExp("(?:^|.*;\\s*)" + 
+    escape(sKey).replace(/[\-\.\+\*]/g, "\\$&") + 
+    "\\s*\\=\\s*((?:[^;](?!;))*[^;]?).*"), "$1"));
+  },
+  setItem: function (sKey, sValue, vEnd, sPath, sDomain, bSecure) {
+    if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey))
+      { return; }
+    var sExpires = "";
+    if (vEnd) {
+      switch (vEnd.constructor) {
+        case Number:
+          sExpires = vEnd === Infinity ? 
+          "; expires=Tue, 19 Jan 2038 03:14:07 GMT" 
+          : "; max-age=" + vEnd;
+          break;
+        case String:
+          sExpires = "; expires=" + vEnd;
+          break;
+        case Date:
+          sExpires = "; expires=" + vEnd.toGMTString();
+          break;
+      }
+    }
+    document.cookie = escape(sKey) + "=" + 
+      escape(sValue) + sExpires + 
+      (sDomain ? "; domain=" + sDomain : "") + 
+      (sPath ? "; path=" + sPath : "") + 
+      (bSecure ? "; secure" : "");
+  },
+  removeItem: function (sKey, sPath) {
+    if (!sKey || !this.hasItem(sKey)) { return; }
+    document.cookie = escape(sKey) + 
+      "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + 
+      (sPath ? "; path=" + sPath : "");
+  },
+  hasItem: function (sKey) {
+    return (new RegExp("(?:^|;\\s*)" + 
+      escape(sKey).replace(/[\-\.\+\*]/g, "\\$&") + 
+      "\\s*\\=")).test(document.cookie);
+  },
+  keys: function () {
+    var aKeys = document.cookie.replace(    
+      /((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, "").
+      split(  /\s*(?:\=[^;]*)?;\s*/);
+    for (var nIdx = 0; nIdx < aKeys.length; nIdx++){
+      aKeys[nIdx] = unescape(aKeys[nIdx]);
+    }
+    return aKeys;
+  }
+};
+
+----------リスト9-5
+<body onload="init();">
+  <script type="text/javascript">
+  // ※docCookiesライブラリを別途読み込んでおく。
+
+  function init(){
+    document.querySelector("#btn").
+      addEventListener("click",func);
+    update();
+  }
+  function update(){
+    var cookies = document.cookie;
+    var cookie_arr = docCookies.keys();
+    var result = '<table border="1">';
+    for (var i = 0;i < cookie_arr.length;i++){
+      var cname = cookie_arr[i];
+      result += "<tr><td>" + cname + "</td><td>" + 
+        docCookies.getItem(cname) + "</td></tr>";
+    }
+    result += "</table>";
+    document.querySelector("#msg").
+      innerHTML = result;
+  }
+  function func(){
+    var key = document.querySelector("#key").value;
+    var val = document.querySelector("#value").value;
+    docCookies.setItem(key, val);
+    update();
+  }
+   </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div role="main">
+    <p id="msg">this is sample page.</p>
+    <p><input type="text" id="key"></p>
+    <p><input type="text" id="value"></p>
+    <p><button id="btn">click</button></p>
+  </div>
+</body>
+
+----------リスト9-6
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    document.querySelector("#btn1").
+      addEventListener("click",load);
+    document.querySelector("#btn2").
+      addEventListener("click",save);
+  }
+  function save(){
+    var key = document.querySelector("#key").value;
+    var val = document.querySelector("#value").value;
+    window.localStorage.setItem(key,val);
+    alert("保存しました。");
+  }
+  function load(){
+    var key = document.querySelector("#key").value;
+    var val = document.querySelector("#value");
+    val.value = window.localStorage.getItem(key);
+  }
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div role="main">
+    <p id="msg">this is sample page.</p>
+    <p><input type="text" id="key"></p>
+    <p><input type="text" id="value"></p>
+    <p><button id="btn1">Load</button>
+      <button id="btn2">Save</button></p>
+  </div>
+</body>
+
+----------リスト9-7
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    document.querySelector("#check1").
+      addEventListener("change",TimerObj.change);
+    TimerObj.update();
+  }
+  var TimerObj = {
+    timer: null,
+    counter: 0,
+    update: function(){
+      document.querySelector("#msg").textContent
+        = "count: " + TimerObj.counter++;
+    },
+    change: function(event){
+      if(event.target.checked){
+        TimerObj.counter = 0;
+        TimerObj.timer = window.setInterval(TimerObj.update,1000);
+      } else {
+        window.clearInterval(this.timer);
+      }
+    }
+  };
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div role="main">
+    <p id="msg">this is sample page.</p>
+    <p><input type="checkbox" id="check1">
+    <label for="check1">Timer on/off</label></p>
+  </div>
+</body>
+
+----------リスト9-8
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    document.querySelector("#btn").
+      addEventListener("click",func);
+  }
+  function func(e){
+    var xhr = new XMLHttpRequest();
+    xhr.addEventListener("readystatechange",callback);
+    xhr.open("GET","data.txt");
+    xhr.send();
+  }
+  function callback(event){
+    if (event.target.readyState == 4){
+      if (event.target.status == 200){
+        var msg = document.querySelector("#msg");
+        msg.textContent = event.target.responseText;
+      }
+    }
+  }
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div role="main">
+    <p id="msg">this is sample page.</p>
+    <p><button id="btn">Load</button></p>
+  </div>
+</body>
+
+----------リスト9-9
+<?php
+$val = $_POST["msg"];
+if ($val == ""){
+  echo "no message...";
+} else {
+  echo "you send: " . $val;
+}
+flush();
+?>
+
+----------リスト9-10
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    document.querySelector("#btn").
+      addEventListener("click",func);
+  }
+  function func(e){
+    var val = document.querySelector("#input").value;
+    val = encodeURI(val);
+    var xhr = new XMLHttpRequest();
+    xhr.addEventListener("readystatechange",callback);
+    xhr.open("POST","serversend.php");
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send("msg=" + val);
+  }
+  function callback(event){
+    if (event.target.readyState == 4){
+      if (event.target.status == 200){
+        var msg = document.querySelector("#msg");
+        msg.textContent = event.target.responseText
+      }
+    }
+  }
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div role="main">
+    <p id="msg">this is sample page.</p>
+    <p><input type="text" id="input">
+    <button id="btn">Load</button></p>
+  </div>
+</body>
+
+----------リスト9-11
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    document.querySelector("#btn").
+      addEventListener("click",func);
+  }
+
+  function func(){
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/data.txt', true);
+    xhr.responseType = 'text';
+    xhr.onload = function(event) {
+      if (event.target.status == 200) {
+        document.querySelector("#msg").
+          textContent = event.target.responseText;
+      }
+    };
+    xhr.send();
+  }
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div role="main">
+    <p id="msg">this is sample page.</p>
+    <button id="btn">Load</button></p>
+  </div>
+</body>
+
+----------リスト9-12
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    document.querySelector("#btn").
+      addEventListener("click",func);
+  }
+
+  function func(){
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/image.jpg');
+    xhr.responseType = 'arraybuffer';
+    xhr.addEventListener('load', function(event) {
+      if (event.target.status == 200) {
+        var blob = new Blob(
+          [new Int8Array(event.target.response)],
+          {type: 'image/jpg'});
+        document.querySelector("#img").src =
+          window.URL.createObjectURL(blob);
+      }
+    });
+    xhr.send();
+  }
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div role="main">
+    <p id="msg">this is sample page.</p>
+    <p><button id="btn">Load</button></p>
+    <p><img id="img" src=""></p>
+  </div>
+</body>
+
+----------リスト9-13
+<?php
+$nm = $_POST["name"];
+$pw = $_POST["password"];
+echo "{\"name\":\"" . $nm . "\",\"password\":\"" . $pw . "\"}";
+flush();
+?>
+
+----------リスト9-14
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    document.querySelector("#btn").
+      addEventListener("click",func);
+  }
+
+  function func(){
+    var formData = new FormData();
+    formData.append('name', 
+      document.querySelector("#name").value);
+    formData.append('password',
+      document.querySelector("#pass").value);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/serversend.php');
+    xhr.responseType = 'text';
+    xhr.onload = function(event) {
+      if (event.target.status == 200) {
+        var obj = JSON.parse(event.target.response);
+        var result = "送信された名前は、" + obj.name;
+        result += "<br>パスワードは、" + obj.password;
+        document.querySelector("#msg").
+          innerHTML = result;
+      }
+    };
+
+    xhr.send(formData);
+  }
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div role="main">
+    <p id="msg">this is sample page.</p>
+    <form id="form1">
+    <p><input type="text" id="name" name="name"></p>
+    <p><input type="password" ID="pass" name="password"></p>
+    </form>
+    <p><button id="btn">Load</button></p>
+  </div>
+</body>
+

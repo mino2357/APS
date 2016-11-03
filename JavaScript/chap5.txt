@@ -1,0 +1,485 @@
+﻿----------　リスト5-1
+function Helo(){};
+
+var obj1 = new Object(Number);
+var obj2 = new Helo();
+document.write("obj1:" + obj1.constructor.name);
+document.write("<br>");
+document.write(" obj2:" + obj2.constructor.name);
+
+----------　リスト5-2
+function Func1(){}
+function Func2(){}
+
+var obj1 = new Func1();
+document.write("obj1 is Func1:" + (obj1 instanceof Func1) + "<br>");
+document.write("obj1 is Func2:" + (obj1 instanceof Func2) + "<br>");
+
+obj1.constructor = Func2;
+document.write("obj1 is Func1:" + (obj1 instanceof Func1) + "<br>");
+document.write("obj1 is Func2:" + (obj1 instanceof Func2) + "<br>");
+
+----------　リスト5-3
+var obj = new Personal("山田太郎","taro@yamada","090-9999-9999");
+document.write(obj);
+
+function Personal(name, mail, tel){
+  this.myname = name;
+  this.mail = mail;
+  this.tel = tel;
+  
+  this.toString = function(){
+    return "<pre>==============================<br>"
+      + " *** " + this.myname + " ***<br>"
+      + "------------------------------<br>"
+      + " mail: " + this.mail + "<br>"
+      + " tel:  " + this.tel + "<br>"
+      + "==============================</pre>";
+  }
+}
+
+----------　リスト5-4
+var taro = new Score("太郎",98,67,82,79);
+var hanako = new Score("花子",77,71,95,64);
+
+document.write((taro + hanako) / 2);
+
+function Score(name,kokugo,sansu,rika,syakai){
+  this.myname = name;
+  this.kokugo = kokugo;
+  this.sansu = sansu;
+  this.rika = rika;
+  this.syakai = syakai;
+
+  this.total = function(){
+    return this.kokugo + this.sansu
+      + this.rika + this.syakai;
+  }
+  this.average = function(){
+    return this.total() / 4;
+  }
+  this.valueOf = function(){
+    return this.average();
+  }
+}
+
+----------　リスト5-5
+var taro = new Card("太郎","山田",35);
+var hanako = new Card("花子","山田",35);
+document.write(taro.equals(hanako) + "<br>");
+hanako.name1 = "太郎";
+document.write(taro.equals(hanako));
+
+function Card(name1,name2,age){
+  this.name1 = name1;
+  this.name2 = name2;
+  this.age = age;
+
+  this.equals = function(obj){
+    if (this.name1 != obj.name1)
+      return false;
+    else if (this.name2 != obj.name2)
+      return false;
+    else if (this.age != obj.age)
+      return false;
+    else
+      return true;
+  }
+}
+
+----------　リスト5-6
+Object.prototype.equals =function(obj){
+  return this.valueOf() == obj.valueOf() &&
+    this.toString() == obj.toString()
+    ? true : false;
+}
+
+var taro = new Card("太郎","山田",35);
+var hanako = new Card("花子","山田",35);
+document.write(taro.equals(hanako) + "<br>");
+hanako.name1 = "太郎";
+document.write(taro.equals(hanako));
+
+function Card(name1,name2,age){
+  this.name1 = name1;
+  this.name2 = name2;
+  this.age = age;
+
+  this.toString = function(){
+    return "[" + this.name1 + " " +
+      this.name2 + " " + this.age + "]";
+  };
+  this.valueOf = function(){
+    return (this.name1 + this.name2).length;
+  }
+}
+
+----------　リスト5-7
+var obj = new Helo();
+document.write(obj.constructor.name);
+
+function Helo(){}
+
+----------　リスト5-8
+function getPrice(n){
+  return n + n * this.tax;
+};
+
+var taxdata = { tax:0.05 };
+var getTax005 = getPrice.bind(taxdata);
+document.write(getTax005(10000) + "円<br>");
+var taxdata2 = { tax:0.1 };
+var getTax010 = getPrice.bind(taxdata2);
+document.write(getTax010(10000) + "円<br>");
+
+----------　リスト5-9
+var result = getCalcData("Taro",100,150, 125, 225,350);
+document.write(result);
+
+function getCalcData(name){
+  var total = 0;
+  for(var i = 1;i < arguments.length;i++)
+    total += arguments[i];
+  var ave = total / (arguments.length - 1);
+  return "[" + name + " 合計:" + total +
+    " 平均:" + ave + "]";
+}
+
+----------　リスト5-10
+function getCaller(){
+  return getCaller.caller == null
+    ? "{{TOP LEVEL}}" : "{{called by " + 
+    getCaller.caller.name + "}}";
+}
+function dummyFunc(){
+  return getCaller();
+}
+function DummyObj(){
+  this.getCaller = function(){
+    return getCaller();
+  }
+}
+
+document.write(getCaller() + "<br>");
+document.write(dummyFunc() + "<br>");
+document.write(new DummyObj().getCaller() + "<br>");
+
+----------　リスト5-11
+function DummyObj(){
+  this.getCaller = getObjCaller;
+  function getObjCaller(){
+    return getCaller();
+  }
+}
+
+----------　リスト5-12
+function helo(){
+  return "Hello," + this.name;
+}
+function bye(){
+  return "Bye," + this.name;
+}
+document.write(helo.apply(bye) + "<br>");
+document.write(bye.apply(helo) + "<br>");
+
+----------　リスト5-13
+function Card(name1,name2,age){
+  this.name1 = name1;
+  this.name2 = name2;
+  this.age = age;
+  this.toString = function(){
+    return "[" + this.name1 + " " +
+      this.name2 + " " + this.age + "]";
+  };
+}
+function NewCard(name1,name2,age){
+  this.name1 = name1;
+  this.name2 = name2;
+  this.age = age;
+  this.toString = function(){
+    return "***" + this.name1 + " " +
+      this.name2 + " " + this.age + "***";
+  };
+}
+NewCard.prototype = new Card();
+
+var taro = new NewCard("太郎","山田",35);
+document.write(taro + "<br>");
+document.write(NewCard.prototype.toString.apply(taro));
+
+----------　リスト5-14
+function calc(num){
+  this.tax = 0.05;
+  return num + num * this.tax;
+}
+
+document.write(calc(1500));
+
+----------　リスト5-15
+function calc(){
+  return num + num * this.tax;
+}
+calc.tax = 0.05;
+document.write(calc(1500));
+
+----------　リスト5-16
+function calc(num){
+  return num + num * arguments.callee.tax;
+}
+calc.tax = 0.05;
+document.write(calc(1500));
+
+----------　リスト5-17
+function AbstCard(name1,name2,age){
+  this.getData = function(){
+    throw "Not use it!";
+  }
+}
+function Card(name1,name2,age){
+  this.name1 = name1;
+  this.name2 = name2;
+  this.age = age;
+  this.getData = function(){
+    return "[" + this.name1 + " - " +
+      this.name2 + " : " + this.age + "]";
+  };
+}
+Card.prototype = new AbstCard();
+
+// var taro = new AbstCard("Taro","Yamada",33);
+// document.write(taro.getData() + "<br>");
+var hanako = new Card("Hanako","Tanaka",28);
+document.write(hanako.getData() + "<br>");
+
+----------　リスト5-18
+function Calc(){
+  var tax = 0.05;
+  if(arguments.callee.obj == null){
+    arguments.callee.obj = this;
+    arguments.callee.obj.calc = function(num){
+      return num + num * tax;
+    };
+  }
+  return arguments.callee.obj;
+}
+
+var calc = new Calc();
+var calc2 = new Calc();
+document.write(calc.calc(1500));
+document.write("::" + (calc == calc2));
+
+----------　リスト5-19
+function MyObject(name) {
+  this.myname = name;
+  this.sayHello = function(){
+    document.write("hello, " + this.myname + "!!");
+  }
+}
+
+var obj = new Object();
+MyObject.call(obj,"Hanako");
+obj.sayHello();
+
+----------　リスト5-20
+function doFunc(obj){
+  obj.message();
+}
+
+function MyObject(name) {
+  this.myname = name;
+  this.message = function(){
+    document.write("hello, " + this.myname + "!!");
+  }
+}
+
+----------　リスト5-21
+function doFunc(obj){
+  if (obj instanceof MyObject){
+    obj.message();
+  } else {
+    document.write("can't call:" + obj + "<br>");
+  }
+}
+
+----------　リスト5-22
+function doFunc(obj){
+  if (typeof obj.message == "function"){
+    obj.message();
+  } else {
+    document.write("can't call:" + obj + "<br>");
+  }
+}
+
+function MyObject(name) {
+  this.myname = name;
+  this.message = function(){
+    document.write("hello, " + this.myname + "!!");
+  }
+}
+
+function MyMsg(){
+  this.message = function(){
+    alert("Hello!");
+  }
+}
+
+var obj1 = new MyObject("Hanako");
+var obj2 = new MyMsg();
+doFunc(obj1);
+doFunc(obj2);
+
+----------　リスト5-23
+function stack(){
+  var total = 0;
+  return function(n){
+    total += n
+    return "add:" + n + " [total:" + total + "]<br>";
+  }
+}
+
+var func = stack();
+document.write(func(10));
+document.write(func(20));
+document.write(func(30));
+
+----------　リスト5-24
+var myobj = {
+  en: {
+    one: function(){ document.write("one."); },
+    two: function(){ document.write("two."); },
+    three: function(){ document.write("three."); }
+  },
+  jp: {
+    one: function(){ document.write("いち。"); },
+    two: function(){ document.write("にぃ。"); },
+    three: function(){ document.write("さん。"); }
+  }
+};
+
+myobj.en.one();
+myobj.en.two();
+myobj.en.three();
+myobj.jp.one();
+myobj.jp.two();
+myobj.jp.three();
+
+----------　リスト5-25
+var tax = 0.05;
+
+var calcFunc = {
+  withTax: function(num){ 
+    return parseInt(num * (1.0 + tax)); },
+  withoutTax: function(num){ 
+    return parseInt(num / (1.0 + tax)); }
+}
+
+function calc(num){
+  document.write(this.calcFunc.withTax(num) + "<br>");
+  document.write(this.calcFunc.withoutTax(num));
+}
+
+var num = 1000;
+calc(num);
+
+----------　リスト5-26
+var tax = 0.05;
+var price = 123400;
+var withtax = price * (1.0 + tax);
+document.write("price:" + price + "<br>");
+document.write("with tax:" + withtax + "<br>");
+
+----------　リスト5-27
+(function(){
+  var tax = 0.05;
+  var price = 123400;
+  var withtax = price * (1.0 + tax);
+  document.write("price:" + price + "<br>");
+  document.write("with tax:" + withtax + "<br>");
+})();
+
+----------　リスト5-28
+// Personalの定義
+var Personal = Object.create({}, {
+  // プロパティ
+  name: {
+    set: function(name){ this._name = name },
+    get: function(){ return this._name }
+  },
+  mail: {
+    set: function(mail){ this._mail = mail },
+    get: function(){ return this._mail }
+  },
+  tel: {
+    set: function(tel){ this._tel = tel },
+    get: function(){ return this._tel }
+  },
+  // メソッド
+  getData: {
+    value: function(){
+      return "名前：" + this.name + 
+        ", メール：" + this.mail +
+        ", 電話：" + this.tel + "<br>";
+    }
+  },
+  print: {
+    value: function(){
+      document.write(this.getData());
+    }
+  },
+  init: {
+    value: function(name,mail,tel){
+      this.name = name;
+      this.mail = mail;
+      this.tel = tel;
+      return this;
+    }
+  }
+});
+
+// Personalのオブジェクトを作成
+var p = Object.create(Personal).init("太郎","taro@yamada","090-9999-9999");
+p.print();
+
+----------　リスト5-29
+var Personal = function(){
+  this.init.apply(this, arguments);
+}
+
+Object.defineProperties(Personal.prototype, {
+  // プロパティ
+  name: {
+    set: function(name){ this._name = name },
+    get: function(){ return this._name }
+  },
+  mail: {
+    set: function(mail){ this._mail = mail },
+    get: function(){ return this._mail }
+  },
+  tel: {
+    set: function(tel){ this._tel = tel },
+    get: function(){ return this._tel }
+  },
+  getData: {
+    value: function(){
+      return "名前：" + this.name + 
+        ", メール：" + this.mail +
+        ", 電話：" + this.tel + "<br>";
+    }
+  },
+  print: {
+    value: function(){
+      document.write(this.getData());
+    }
+  },
+  init: {
+    value: function(name,mail,tel){
+      this.name = name;
+      this.mail = mail;
+      this.tel = tel;
+      return this;
+    }
+  }
+});
+
+var p = new Personal("太郎","taro@yamada","090-9999-9999");
+p.print();

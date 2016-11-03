@@ -1,0 +1,29 @@
+﻿@charset "UTF-8";
+
+h2 {
+	padding: 17px 0px 0px 100px;
+	color: #442220;
+	font-size: 18px;
+	/*border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: #442220;*/
+	margin-top: 20px;
+	margin-right: 20px;
+	margin-bottom: 20px;
+	margin-left: 0px;
+	padding-top: 10px;
+	padding-right:10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+}
+
+h3{
+	font-size:15px;		/*文字サイズ*/
+	width:660px;		/*横幅*/
+	padding:10px 0px 10px 20px;	/*パディング*/
+	margin: 10px 0;
+	background-color:#009900;		/*背景色*/
+	color:#ffffff;		/*文字色*/
+	border-radius:3px;		/*角丸にする*/
+	-moz-border-radius:3px; -webkit-border-radius:3px; -o-border-radius:3px; -ms-border-radius:3px;		/*角丸にする（ベンダープレフィックス付きの指定）*/
+}

@@ -1,0 +1,171 @@
+﻿@charset "UTF-8";
+
+/* すべてのページに適用 */
+
+* {
+	margin:0; padding:0; 	/*全要素のマージン・パディングをリセット*/
+}
+
+body{
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	background-image: url("../images/back012.gif");
+	background-repeat: repeat;
+	/*font-size: 95%;*/
+	font-family: "MS ゴシック",sans-serif;
+	line-height: 1.5;
+	color:#333333;
+}
+
+div#pagebody{
+	width: 1000px;
+	height: auto;
+	margin: 0 auto;
+	background-color:#ffffff;
+	background-image:url("../images/bg_pagebody.png");	/*コンテンツ全体の背景画像*/
+	background-repeat:repeat-y;		/*背景画像を縦方向に繰り返す*/
+}
+
+h1 {
+	height:70px;
+	margin: 0px 0 0px 0;
+	padding: 0 0 0 0;
+	line-height: 0;
+	text-align: center;
+}
+
+div#news h2{
+	width: 240px;
+	height: 43px;
+	padding: 0px;
+	margin: 10px 20px 0px 0px;
+	color: #442220;
+	font-size: 26px;
+	/*border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: #442220;*/
+	background-image: url(../images/back011.gif);
+	text-align: center;
+}
+
+p {
+	line-height: 160%;
+}
+
+img {
+	border-style: none;
+}
+
+a:link {
+	color: #6aa4d6;
+}
+a:visited {
+	color: #4f7697;
+}
+a:hover {
+	color: #4f7697;
+}
+a:active {
+	color: #aed3f2;
+}
+
+/*メインメニュー*/
+
+hr#main{
+	width:960px;
+	margin: 0 20px;
+}
+
+ul#nav{
+	width: 960px;
+	height: 50px;
+	margin:0px 20px;
+}
+
+#nav li {
+	display: inline;
+	list-style-type: none;
+	float:left;
+}
+
+#nav li a{
+	background-color:#0033cc;
+	color:#ffffff;
+	display:block;
+	width:192px;
+	height:35px;
+	padding:15px 0px 0px 0px ;
+	text-align:center;
+	text-decoration:none;
+    border-radius: 3px;        /* CSS3草案 */  
+    -webkit-border-radius: 3px;    /* Safari,Google Chrome用 */  
+    -moz-border-radius: 3px;   /* Firefox用 */  
+
+}
+
+#nav li a:hover{
+	background-color:#330099;
+}
+
+#footer{
+	background-image: url(../images/003.png);
+	background-repeat: repeat-x;
+	margin-top: 30px;
+	margin-left: 20px;
+	margin-right: 20px;
+	padding:20px 0px 20px 0px;
+	font-size: smaller;
+	color: #442220;
+	clear:both;
+	text-align:center;			/*センタリング*/
+}
+
+/* news 右カラム */
+div#news{
+	width: 260px;
+	margin: 0px 10px 0px 25px;
+	float:left;
+}
+
+div#scr{
+	overflow:auto;   /* スクロール表示 */ 
+	width: 240px;
+	height: 500px;
+	background-color: #ffffff;
+	border:1px solid #000000;
+}
+
+div#scr p{
+	margin:5px 5px;
+}
+
+div#scr hr{
+	margin:5px 5px;
+}
+
+
+/* news 左カラム */
+div#info{
+	width: 660px;
+	margin: 0px 20px 0px 25px;
+	float:left;
+}
+
+/*ヘッダ画像*/
+
+#im_index{
+	margin:0px 20px;
+}
+
+
+/* ideal.html */
+.float img {
+	float:left;
+	padding-right: 1em;
+}
+
+.clear {
+	clear: both;
+}
+
+

@@ -1,0 +1,80 @@
+\documentclass[11pt,a4paper]{jsarticle}
+%
+\usepackage{amsmath,amssymb}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{ascmac}
+\usepackage{fancybox,ascmac}
+%
+\setlength{\textwidth}{\fullwidth}
+\setlength{\textheight}{39\baselineskip}
+\addtolength{\textheight}{\topskip}
+\setlength{\voffset}{-0.5in}
+\setlength{\headsep}{0.3in}
+%
+\newcommand{\divergence}{\mathrm{div}\,}  %ダイバージェンス
+\newcommand{\grad}{\mathrm{grad}\,}  %グラディエント
+\newcommand{\rot}{\mathrm{rot}\,}  %ローテーション
+%
+%\pagestyle{myheadings}
+\pagestyle{empty}
+
+\begin{document}
+
+
+\[
+\left(  \nabla^{2} -\cfrac{1}{c^{2}}\frac{\partial^{2}}{\partial t^{2}}  - \frac{c^{2}m^{2}}{\hbar^{2}} \right) \phi(x) = 0
+\]
+
+\[
+\frac{d}{dt} \left( \frac{\partial L}{\partial \dot{q}_{i}} \right) - \frac{\partial L}{\partial q_{i}} = 0
+\]
+
+\[
+\frac{1}{s^2}\frac{\partial^2 u}{\partial t^2} = \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} + \frac{\partial^2 u}{\partial z^2}
+\]
+
+\[
+\frac{\partial\phi}{\partial t} = D\nabla^2\phi(\vec{r},t)
+\]
+\[
+\frac{1}{\pi}=\frac{2\sqrt{2}}{99^2} \sum_{n=0}^\infty \frac{(4n)!(1103+26390n)}{(4^n99^nn!)^4}
+\]
+
+\[
+\zeta (2)=\sum^{\infty }_{n=1} \frac{1}{n^2}=\frac{\pi^2}{6}
+\]
+
+\[
+\zeta (3)=\frac{\pi^2}{7} \left\{ 1-4\sum_{k=1}^\infty \frac {\zeta (2k)} {(2k+1)(2k+2) \, 2^{2k}} \right\}
+\]
+
+\[
+\oint_{C} (P dx + Q dy) = \iint_{D} \left( \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} \right) dx dy
+\]
+
+\[
+\oint_C f(z) \, dz\ = 0
+\]
+\[
+\Box A^\mu -\partial^\mu\partial_\nu A^\nu = \mu_0 j^\mu
+\]
+\[
+\nabla\cdot \boldsymbol{B}(t,\boldsymbol{x}) = 0
+\]
+\[
+\nabla\times \boldsymbol{E}(t,\boldsymbol{x})+\frac{\partial\boldsymbol{B}(t,\boldsymbol{x})}{\partial t} = \mathbf{0}
+\]
+\[
+\nabla\cdot \boldsymbol{D}(t,\boldsymbol{x}) = \rho(t,\boldsymbol{x})
+\]
+\[
+\nabla\times \boldsymbol{H}(t,\boldsymbol{x}) -\frac{\partial\boldsymbol{D}(t,\boldsymbol{x})}{\partial t} = \boldsymbol{j}(t,\boldsymbol{x})
+\]
+\[
+\frac{ \partial \boldsymbol{v} }{ \partial t } + ( \boldsymbol{v} \cdot \nabla )\boldsymbol{v} = -\frac{ 1 }{ \rho } \nabla p + \nu \nabla^2 \boldsymbol{v} + \boldsymbol{F}
+\]
+\[
+\pi = \sum_{k = 0}^{\infty}\left[ \frac{1}{16^k} \left( \frac{4}{8k + 1} - \frac{2}{8k + 4} - \frac{1}{8k + 5} - \frac{1}{8k + 6} \right) \right]
+\]
+\end{document}

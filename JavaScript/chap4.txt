@@ -1,0 +1,386 @@
+﻿----------リスト4-1
+var arr = {first:"最初の値", second:"次の値", last:"最後の値"};
+arr["second"] = "真ん中の値";
+document.write(arr["first"] + "," + arr["second"] + "," + arr["last"]);
+
+----------リスト4-2
+var arr = {};
+arr["data"] = [1,2,3,4,5,6,7,8,9,10];
+
+arr["total"] = function(){
+  var total = 0;
+  var data = arr["data"];
+  for(var item in data)
+    total += data[item];
+  return total;
+}
+
+document.write(arr["total"]());
+
+----------リスト4-3
+var arr = {};
+arr.data = [1,2,3,4,5,6,7,8,9,10];
+
+arr.total = function(){
+  var total = 0;
+  for(var item in arr.data)
+    total += arr.data[item];
+  return total;
+}
+
+document.write(arr.total());
+
+----------リスト4-4
+var num1 = 123;
+var num2 = 456;
+document.write(num1.toString() + num2.toString());
+
+----------リスト4-5
+var obj = {}
+obj.hello = function(){ alert("Hello!!"); };
+
+var obj2 = obj;
+obj2.hello();
+obj.hello = function(){ alert("Bye!!"); };
+obj2.hello();
+
+----------リスト4-6
+arr.total = function(){
+  var total = 0;
+  for(var item in arr.data)
+    total += arr.data[item];
+  return total;
+}
+
+----------リスト4-7
+arr.total = function(){
+  var total = 0;
+  for(var item in this.data)
+    total += this.data[item];
+  return total;
+}
+
+----------リスト4-8
+var personal = {};
+personal.myname = "太郎";
+personal.mail = "taro@yamada";
+personal.tel = "090-9999-9999";
+personal.getData = function(){
+  return "名前：" + this.myname + 
+    ", メール：" + this.mail +
+    ", 電話：" + this.tel;
+}
+personal.print = function(){
+  document.write(this.getData());
+}
+
+personal.print();
+
+----------リスト4-9
+var p1 = new Personal("太郎","taro@yamada","090-9999-9999");
+var p2 = new Personal("花子","hanako@flower","080-888-888");
+p1.print();
+p2.print();
+
+// コンストラクタ関数
+function Personal(name,mail,tel){
+  this.myname = name;
+  this.mail = mail;
+  this.tel = tel;
+  this.getData = function(){
+    return "名前：" + this.myname + 
+      ", メール：" + this.mail +
+      ", 電話：" + this.tel + "<br>";
+  }
+  this.print = function(){
+    document.write(this.getData());
+  }
+}
+
+----------リスト4-10
+var p1 = Personal("太郎","taro@yamada","090-9999-9999");
+p1.print();
+
+function Personal(name,mail,tel){
+  this.myname = name;
+  this.mail = mail;
+  this.tel = tel;
+  this.getData = function(){
+    return "名前：" + this.myname + 
+      ", メール：" + this.mail +
+      ", 電話：" + this.tel + "<br>";
+  }
+  this.print = function(){
+    document.write(this.getData());
+  }
+  return this;
+}
+
+----------リスト4-11
+var p1 = Personal("太郎","taro@yamada","090-9999-9999");
+var p2 = Personal("花子","hanako@flower","080-888-888");
+p1.print();
+p2.print();
+
+----------リスト4-12
+function Personal(name,mail,tel){
+  this.getData = function(){
+    return "名前：" + name + 
+      ", メール：" + mail +
+      ", 電話：" + tel + "<br>";
+  }
+  this.print = function(){
+    document.write(this.getData());
+  }
+}
+
+----------リスト4-13
+var p = new Personal("太郎","taro@yamada","090-9999-9999");
+p.print();
+alert(p.name() + "\n" + p.mail() + "\n" + p.tel());
+
+function Personal(name,mail,tel){
+  var myname = name;
+  var mymail = mail;
+  var mytel = tel;
+  this.name = function(){
+    return myname;
+  }
+  this.mail = function(){
+    return mymail;
+  }
+  this.tel = function(){
+    return mytel;
+  }
+  this.getData = function(){
+    return "名前：" + myname + 
+      ", メール：" + mymail +
+      ", 電話：" + mytel + "<br>";
+  }
+  this.print = function(){
+    document.write(this.getData());
+  }
+}
+
+----------リスト4-14
+var p = new Personal("太郎","taro@yamada","090-9999-9999");
+p.print();
+
+function Personal(name,mail,tel){
+  var myname = name;
+  var mymail = mail;
+  var mytel = tel;
+  function getData(){
+    return "名前：" + myname + 
+      ", メール：" + mymail +
+      ", 電話：" + mytel + "<br>";
+  }
+  this.print = function(){
+    document.write(getData());
+  }
+}
+
+----------リスト4-15
+function Personal(name,mail,tel){
+  this.myname = name;
+  this.mail = mail;
+  this.tel = tel;
+
+  function getData(){
+    return "名前：" + this.myname + 
+      ", メール：" + this.mail +
+      ", 電話：" + this.tel + "<br>";
+  }
+  this.print = function(){
+    document.write(getData());
+  }
+}
+
+----------リスト4-16
+function Personal(name,mail,tel){
+  this.myname = name;
+  this.mail = mail;
+  this.tel = tel;
+  var self = this;
+
+  function getData(){
+    return "名前：" + self.myname + 
+      ", メール：" + self.mail +
+      ", 電話：" + self.tel + "<br>";
+  }
+  this.print = function(){
+    document.write(getData());
+  }
+}
+
+----------リスト4-17
+Personal.id = Personal.id == undefined ? 1 : Personal.id;
+Personal.getId = function(){
+  return Personal.id++;
+}
+
+var p1 = new Personal("太郎","taro@yamada","090-9999-9999");
+var p2 = new Personal("花子","hanako@flower","080-888-888");
+var p3 = new Personal("幸子","sachi@co","070-77777-77777");
+p1.print();
+p2.print();
+p3.print();
+
+function Personal(name,mail,tel){
+  this.id = Personal.getId();
+  this.myname = name;
+  this.mail = mail;
+  this.tel = tel;
+  this.getData = function(){
+    return "id=" + this.id + 
+      " 名前：" + this.myname + 
+      ", メール：" + this.mail +
+      ", 電話：" + this.tel + "<br>";
+  }
+  this.print = function(){
+    document.write(this.getData());
+  }
+}
+
+----------リスト4-18
+function Func1(){};
+function Func2(){};
+
+var obj1 = new Func1();
+var obj2 = new Func2();
+document.write("obj1 is Func1:" + (obj1 instanceof Func1) + "<br>");
+document.write("obj1 is Func2:" + (obj1 instanceof Func2) + "<br>");
+document.write("obj2 is Func1:" + (obj2 instanceof Func1) + "<br>");
+document.write("obj2 is Func2:" + (obj2 instanceof Func2) + "<br>");
+
+----------リスト4-19
+function Personal(name,mail,tel){
+  this.myname = name;
+  this.mail = mail;
+  this.tel = tel;
+  this.getData = function(){
+  return " 名前：" + this.myname + 
+    ", メール：" + this.mail +
+    ", 電話：" + this.tel + "\n";
+  }
+  this.print = function(){
+    document.write(this.getData());
+  }
+}
+
+function NewPersonal(name,mail,tel){
+  this.myname = name;
+  this.mail = mail;
+  this.tel = tel;
+  this.show = function(){
+    alert(this.getData());
+  }
+}
+
+NewPersonal.prototype = new Personal();
+var p1 = new NewPersonal("花子","hana@co","080-888-888");
+p1.print();
+p1.show();
+
+----------リスト4-20
+function Personal(){
+  this.myname = "no name";
+  this.mail = "no mail";
+  this.tel = "no tel";
+  this.getData = function(){
+  return " 名前：" + this.myname + 
+    ", メール：" + this.mail +
+    ", 電話：" + this.tel + "<br>";
+  }
+  this.print = function(){
+    document.write(this.getData());
+  }
+}
+
+function NewPersonal(){
+  this.setData = function(name,mail,tel){
+    this.myname = name;
+    this.mail = mail;
+    this.tel = tel;
+  }
+}
+
+NewPersonal.prototype = new Personal();
+var p1 = new NewPersonal();
+var p2 = new NewPersonal();
+p2.setData("花子","hana@co","080-888-888");
+p1.print();
+p2.print();
+
+----------リスト4-21
+function Personal(name,mail,tel){
+  this.myname = name;
+  this.mail = mail;
+  this.tel = tel;
+  this.getData = function(){
+  return " 名前：" + this.myname + 
+    ", メール：" + this.mail +
+    ", 電話：" + this.tel + "\n";
+  }
+  this.print = function(){
+    document.write(this.getData());
+  }
+}
+
+function NewPersonal(name,mail,tel){
+  this.myname = name;
+  this.mail = mail;
+  this.tel = tel;
+}
+
+NewPersonal.prototype = new Personal();
+var p1 = new NewPersonal("太郎","taro@yamada","090-9999-9999");
+var p2 = new NewPersonal("花子","hana@co","080-888-888");
+p2.print = function(){
+  alert(this.getData());
+};
+p1.print();
+p2.print();
+
+----------リスト4-22
+function Personal(){
+  this.myname = "no name";
+  this.mail = "no mail";
+  this.tel = "no tel";
+  this.getData = function(){
+  return " 名前：" + this.myname + 
+    ", メール：" + this.mail +
+    ", 電話：" + this.tel + "<br>";
+  }
+  this.print = function(){
+    document.write(this.getData());
+  }
+}
+
+function NewPersonal(name,mail,tel){
+  this.myname = name;
+  this.mail = mail;
+  this.tel = tel;
+}
+
+NewPersonal.prototype = new Personal();
+var p1 = new NewPersonal("太郎","taro@yamada","090-9999-9999");
+var p2 = new NewPersonal("花子","hana@co","080-888-888");
+NewPersonal.prototype.getData = function(){
+  return "[" + this.myname + " " + this.mail +
+    " " + this.tel + "]<br>";
+};
+p1.print();
+p2.print();
+
+----------リスト4-23
+function Func1(){}
+function Func2(){}
+Func2.prototype = new Func1();
+
+var obj1 = new Func1();
+var obj2 = new Func2();
+document.write("obj1 is Func1:" + d (obj1 instanceof Func1) + "<br>");
+document.write("obj1 is Func2:" + (obj1 instanceof Func2) + "<br>");
+document.write("obj2 is Func1:" + (obj2 instanceof Func1) + "<br>");
+document.write("obj2 is Func2:" + (obj2 instanceof Func2) + "<br>");

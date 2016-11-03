@@ -1,0 +1,58 @@
+\documentclass[11pt,a4paper,fleqn]{jsarticle}
+
+\usepackage[top=30truemm,bottom=30truemm,left=20truemm,right=15truemm]{geometry}
+
+%
+\usepackage{amsmath,amssymb}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{ascmac}
+\usepackage{fancybox,ascmac}
+%
+
+\addtolength{\textheight}{\topskip}
+\setlength{\voffset}{-0.5in}
+\setlength{\headsep}{0.3in}
+
+
+
+%
+\newcommand{\divergence}{\mathrm{div}\,}  %ダイバージェンス
+\newcommand{\grad}{\mathrm{grad}\,}  %グラディエント
+\newcommand{\rot}{\mathrm{rot}\,}  %ローテーション
+%
+%\pagestyle{myheadings}
+\pagestyle{empty}
+
+\begin{document}
+
+\section{今週の宿題}
+以下の問いには結果だけでなく導出過程など記述もしっかり書くこと。　\\
+(1) $y=|2x-1|$ のグラフを書きなさい。  \\
+(2) $y=|2x-1| - |x+2|$ のグラフを書きなさい。  \\
+(3) 次の二次方程式を解きなさい。
+\[
+ax^{2} + bx +c = 0    \hspace{15mm}    (a \not= 0)
+\]
+(4) 次の方程式を解きなさい。
+\[
+ax^{2} + bx +c = 0
+\]
+(5) 次の二次方程式の解を求めなさい。
+\[
+x^{2}  - 2x -3 = 0
+\]
+(6) $y=x^{2}  - 2x -3 = 0$ のグラフを書きなさい。  \\
+\section{考えてきてほしいこと}
+
+次の関数のグラフはどんな形だろうか。\footnote{難しそうに思えたら、まず簡単な場合に戻ること。この場合は、絶対値の記号がもっと少ない場合から考えていくと良い。}
+\[
+y = f(x) =  \Biggl| \biggl| \Bigl| \bigl| |x| -1\bigl| -1 \Bigl| -1 \biggl| -1 \Biggl|
+\]
+\\
+
+\section{調べてきてほしいこと}
+
+今週の宿題の(3)は、一般の二次方程式の解の公式を求める問題だが、一般のn次方程式の解の公式は存在するか。\footnote{数学が大好きな友達（数学ガール、数学ボーイ）に聞けば、答えてくれると思います。}
+
+\end{document}

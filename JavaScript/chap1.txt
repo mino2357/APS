@@ -1,0 +1,81 @@
+﻿----------リスト1-1
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta http-equiv="content-type" 
+    content="text/html; charset=UTF-8">
+  <title>sample</title>
+  <style>
+  body { font-size:12pt; color:#000066; }
+  h1 { font-size:18pt; background-color:#DDDDFF; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Sample Page</h1>
+  </header>
+  <div role="main">
+    <p>これはHTMLのサンプルページです。</p>
+  </div>
+</body>
+</html>
+
+----------リスト1-2
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta http-equiv="content-type" 
+    content="text/html; charset=UTF-8">
+  <title>sample</title>
+  <style>
+  body { font-size:12pt; color:#000066; }
+  h1 { font-size:18pt; background-color:#DDDDFF; }
+  </style>
+  <script type="text/javascript">
+  alert("スクリプトを実行!");
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Sample Page</h1>
+  </header>
+  <div role="main">
+    <p>これはHTMLのサンプルページです。</p>
+  </div>
+</body>
+</html>
+
+----------リスト1-3
+alert("スクリプトを実行!");
+
+----------リスト1-4
+<script type="text/javascript" src="script.js"></script>
+
+----------リスト1-5
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta http-equiv="content-type" 
+    content="text/html; charset=UTF-8">
+  <title>sample</title>
+  <style>
+  body { font-size:12pt; color:#000066; }
+  h1 { font-size:18pt; background-color:#DDDDFF; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Sample Page</h1>
+  </header>
+  <div role="main">
+    <p>これはHTMLのサンプルページです。</p>
+    <script type="text/javascript">
+    document.write("<p>スクリプトで書かれたテキストです。</p>");
+    </script>
+    <p>これはダミーのコンテンツです。</p>
+    <script type="text/javascript">
+    document.write("<p>スクリプトで書かれたテキストその2です。</p>");
+    </script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,204 @@
+﻿----------リスト2-1
+<script type="text/javascript">
+var str = "Hello";
+document.write(str);
+str = 12345;
+document.write(str);
+</script>
+
+----------リスト2-2
+<script type="text/javascript">
+const str = "Hello";
+document.write(str);
+str = 12345;
+document.write(str);
+</script>
+
+----------リスト2-3
+<script type="text/javascript">
+var arr = ["ABC", "DEF"];
+arr[3] = "end";
+document.write(arr[0]);
+document.write(",");
+document.write(arr[1]);
+document.write(",");
+document.write(arr[2]);
+document.write(",");
+document.write(arr[3]);
+</script>
+
+----------リスト2-4
+var X = 10 + 20;
+document.write(X);
+
+----------リスト2-5
+var A = 10;
+var B = 20;
+var X = A + B;
+document.write(X);
+
+----------リスト2-6
+document.write(10 + 20);
+
+----------リスト2-7
+var X = "Hello," + "Welcome";
+document.write(X);
+
+----------リスト2-8
+var num = 1234;
+document.write(num);
+if (num % 2 == 0){
+  document.write(":偶数です。");
+} else {
+  document.write(":奇数です。");
+}
+
+----------リスト2-9
+var num = 1;  // 1～12の整数
+document.write(num);
+if (num <= 0){
+  document.write(":そんな月はありません。");
+} else if (num == 1){
+  document.write(":お正月です。");
+} else if (num < 3){
+  document.write(":今は冬です。");
+} else if (num < 6){
+  document.write(":今は春です～。");
+} else if (num < 9){
+  document.write(":今は夏です！");
+} else if (num < 12){
+  document.write(":今は秋です……。");
+} else if (num == 12){
+  document.write(":師走です。");
+} else {
+  document.write(":そんな月はありません。");
+}
+
+----------リスト2-10
+var num = 8; // 1～12の整数
+document.write(num);
+switch (num){
+  case 1:
+  document.write(":お正月です。");
+  break;
+  case 6:
+  document.write(":梅雨です。");
+  break;
+  case 8:
+  document.write(":夏休みです。");
+  break;
+  case 12:
+  document.write(":師走です。");
+  break;
+  default:
+  document.write(":特にありません。");
+  break;
+}
+
+----------リスト2-11
+var num = 100;
+var counter = 1;
+while(counter <= num){
+  if (counter % 2 == 0){
+    document.write(counter);
+    document.write(" ");
+  }
+  counter++;
+}
+
+----------リスト2-12
+var num = 100;
+for(var i = 1;i <= num;i++){
+  if (i % 2 == 0){
+    document.write(i);
+    document.write(" ");
+  }
+}
+
+----------リスト2-13
+var nums = [12,34,56,78,90];
+var total = 0;
+for(var num in nums){
+  total += nums[num];
+}
+document.write("合計：");
+document.write(total);
+document.write(" 平均：");
+document.write(total / 5);
+
+----------リスト2-14
+var num = 100;
+for(var i = 2;i <= num;i++){
+  var flg = false;
+  for(var j = 2;j < i;j++){
+    if (i % j == 0){
+      flg = true;
+      break;
+    }
+  }
+  if (flg) continue;
+  document.write(i);
+  document.write(" ");
+}
+
+----------リスト2-15
+var num = 100;
+counter:
+for(var i = 2;i <= num;i++){
+  for(var j = 2;j < i;j++){
+    if (i % j == 0) continue counter;
+  }
+  document.write(i);
+  document.write(" ");
+}
+
+----------リスト2-16
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  ……略……
+  <script type="text/javascript">
+  function writeTotal(num){
+    var total = 0;
+    for(var i = 1;i <= num;i++)
+      total += i;
+    document.write(total);
+  }
+  </script>
+  </head>
+<body>
+  ……略……
+  <script type="text/javascript">
+  writeTotal(100);
+  </script>
+</body>
+</html>
+
+----------リスト2-17
+for(var i = 3;i < 100;i++){
+  if (isPrime(i)){
+    document.write(i);
+    document.write(", ");
+  }
+}
+
+
+function isPrime(num){
+  for(var j = 2;j < num;j++){
+    if (num % j == 0) return false;
+  }
+  return true;
+}
+
+----------リスト2-18
+var num = 123;
+try {
+  if (num > 100) throw "Too Big!";
+  if (num < 1) throw "Too Small!";
+  var total = 0;
+  for(var i = 1;i<= num;i++)
+    total += i;
+  document.write(num + "までの合計：" + total);
+} catch(e){
+  document.write("ERROR!!(" + e + ")");
+}

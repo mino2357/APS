@@ -1,0 +1,554 @@
+﻿----------リスト7-1
+var flg1 = document.implementation.
+  hasFeature("Events", "2.0");
+var flg2 = document.implementation.
+  hasFeature("Core", "2.0");
+var flg3 = document.implementation.
+  hasFeature("XPath", "3.0");
+alert("LEVEL 2 EVENT:" +flg1 + "\nLEVEL 2 CORE:" + 
+  flg2 + "\nLEVEL 3 Xpath:" + flg3);
+
+----------リスト7-2
+document.write(document + "<br>");
+document.write(document.head + "<br>");
+document.write(document.body);
+
+----------リスト7-3
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta http-equiv="content-type" 
+    content="text/html; charset=UTF-8">
+  <title>sample</title>
+</head>
+<body>
+  <header>
+    <h1>Sample Page</h1>
+  </header>
+  <div role="main">
+  </div>
+</body>
+<script type="text/javascript">
+document.body.textContent = "this is body.";
+</script>
+</html>
+△●●●●
+
+----------リスト7-4
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta http-equiv="content-type" 
+    content="text/html; charset=UTF-8">
+  <title>sample</title>
+  <style>
+  body { font-size:12pt; color:#000066; }
+  h1 { font-size:18pt; background-color:#DDDDFF; }
+  pre { background-color:#EEEEEE; }
+  </style>
+  <script type="text/javascript">
+  function init(){
+    document.body.textContent = "this is body.";
+  }
+  </script>
+</head>
+<body onload="init();">
+  <header>
+    <h1>Sample Page</h1>
+  </header>
+  <div role="main">
+  </div>
+</body>
+</html>
+
+----------リスト7-5
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    var res = document.getElementById("msg");
+    res.textContent = "※これはスクリプトで書き換えた内容です。";
+  }
+  </script>
+  <header>
+    <h1>Sample Page</h1>
+  </header>
+  <div role="main">
+    <p id="msg">wait...</p>
+  </div>
+</body>
+
+----------リスト7-6
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    var res = document.getElementsByName("msg");
+    res[0] = document.getElementById("h1"); // 変わらない
+    var counter = 1;
+    for(var item in res){
+      res[item].textContent = counter++ + 
+        ": スクリプトで書き換えた内容です。";    
+    }
+  }
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div role="main">
+    <p name="msg">A...</p>
+    <p name="msg">B...</p>
+    <p name="msg">C...</p>
+  </div>
+</body>
+
+----------リスト7-7
+for(var i = 0;i < res.length;i++){
+  res[i].textContent = counter++ + 
+    ": スクリプトで書き換えた内容です。";
+}
+
+----------リスト7-8
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    var res = document.querySelectorAll("div p");
+    for(var i = 0;i < res.length;i++){
+      res[i].innerHTML = "<b>changed!!</b>";
+    }
+  }
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+    <p> selector API tag change</p>
+  </header>
+  <div role="main">
+    <p>A...</p>
+    <p>B...</p>
+  </div>
+</body>
+
+----------リスト7-9
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    var main = document.querySelector("#main");
+    var objs = main.childNodes;
+    for(var i = 0;i < objs.length;i++){
+      objs[i].textContent = i + ":ノード";
+    }
+  }
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div id="main" role="main">
+    <p>A</p>
+  </div>
+</body>
+
+----------リスト7-10
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    var dom = document.querySelector("#msg");
+    dom.onclick = function(){
+      alert("クリック!!");
+    }
+  }
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div id="main" role="main">
+    <p id="msg">click!</p>
+  </div>
+</body>
+
+----------リスト7-11
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    var dom = document.querySelector("#msg");
+    dom.addEventListener("mousedown",funcA);
+    dom.addEventListener("mousedown",funcB);
+  }
+
+  function funcA(){
+    alert("function Aを実行。");  
+  }
+  function funcB(){
+    alert("function Bを実行。");  
+  }
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div id="main" role="main">
+    <p id="msg">click!</p>
+  </div>
+</body>
+
+----------リスト7-12
+<body onload="init();">
+  <script type="text/javascript">
+  var dom = null
+
+  function init(){
+    dom = document.querySelector("#msg");
+    dom.onclick = funcB;
+    dom.addEventListener("click",funcA);
+  }
+
+  function funcA(){
+    alert("LEVEL 2");
+    dom.onclick = null;
+  }
+  function funcB(){
+    alert("LEVEL 0");  
+  }
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div id="main" role="main">
+    <p id="msg">click!</p>
+  </div>
+</body>
+
+----------リスト7-13
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    var dom = document.querySelector("#msg");
+    dom.addEventListener("click",funcA);
+    var dom2 = document.querySelector("#msg2");
+    dom2.addEventListener("click",funcB);
+    var dom3 = document.querySelector("#main");
+    dom3.addEventListener("click",funcC);
+    document.body.addEventListener("click",funcD);
+  }
+
+  function funcA(){
+    alert("function Aを実行。");  
+  }
+  function funcB(){
+    alert("function Bを実行。");  
+  }
+  function funcC(){
+    alert("function Cを実行。");  
+  }
+  function funcD(){
+    alert("function Dを実行。");  
+  }
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div id="main" role="main">
+    <p id="msg">click!</p>
+    <p id="msg2">other click.</p>
+    <p id="msg3">not click...</p>
+  </div>
+</body>
+
+----------リスト7-14
+function init(){
+  var dom = document.querySelector("#msg");
+  dom.addEventListener("mousedown", funcA);
+  var dom2 = document.querySelector("#msg2");
+  dom2.addEventListener("mousedown", funcB);
+  var dom3 = document.querySelector("#main");
+  dom3.addEventListener("click",funcC);
+  document.body.addEventListener("click", funcD);
+}
+
+----------リスト7-15
+function init(){
+  var dom = document.querySelector("#msg");
+  dom.addEventListener("click", funcA, false);
+  var dom2 = document.querySelector("#msg2");
+  dom2.addEventListener("click", funcB, false);
+  var dom3 = document.querySelector("#main");
+  dom3.addEventListener("click",funcC,true);
+  document.body.addEventListener("click", funcD,true);
+}
+
+----------リスト7-16
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    var dom = document.querySelector("#msg");
+    document.body.addEventListener("click", funcA, false);
+  }
+  function funcA(event){
+    var res ="type:" + event.type;
+    res += "\nid:" + event.target.id;
+    alert(res);
+  }
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div id="main" role="main">
+    <p id="msg">click!</p>
+    <p id="msg2">other click.</p>
+  </div>
+</body>
+
+----------リスト7-17
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    var dom = document.querySelector("#msg");
+    document.body.addEventListener("mouseover", funcA);
+    document.body.addEventListener("mouseout", funcA);
+    document.body.addEventListener("mousemove", funcA);
+    document.body.addEventListener("mousedown", funcA);
+    document.body.addEventListener("mouseup", funcA);
+  }
+  function funcA(event){
+    var res ="type:" + event.type;
+    res += "<br>button:" + event.button;
+    res += "<br>" + event.clientX + "," + event.clientY;
+    res += "<br>keys:" + event.altKey + "," + event.ctrlKey 
+      + "," + event.metaKey + "," + event.shiftKey;
+    var dom = document.querySelector("#msg");
+    dom.innerHTML = res;
+  }
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div id="main" role="main">
+    <p id="msg" style="background:#ccc; height:200px;">click!</p>
+  </div>
+</body>
+
+----------リスト7-18
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    var dom = document.querySelector("#msg");
+    makeDrag(dom);
+  }
+  
+  function makeDrag(dom){
+    dom.dragF = false;
+    dom.addEventListener("mousedown", function(event){
+      if (event.button == 0){
+        event.target.dragF = true;
+      } else {
+        event.target.dragF = false;
+      }
+    });
+    dom.addEventListener("mouseup", function(event){
+      event.target.dragF = false;
+      event.target.innerHTML = "ドラッグしてません。";
+    });
+    dom.addEventListener("mouseout", function(event){
+      event.target.dragF = false;
+      event.target.innerHTML = "ドラッグしてません。";
+    });
+    dom.addEventListener("mousemove", function(event){
+      if (!event.target.dragF) return;
+      event.target.innerHTML = "ドラッグ中";
+    });
+  }
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div id="main" role="main">
+    <p id="msg">click!</p>
+  </div>
+</body>
+
+----------リスト7-19
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    var dom = document.querySelector("#input");
+    makeKeyEvent(dom);
+  }
+
+  function makeKeyEvent(dom){
+    dom.addEventListener("keydown", function(event){
+      var msg = document.querySelector("#code");
+      msg.innerHTML = event.keyCode + ":" +
+        String.fromCharCode(event.keyCode);
+    });
+    dom.addEventListener("keypress", function(event){
+      var msg = document.querySelector("#msg");
+      msg.innerHTML += event.charCode + ":" +
+        String.fromCharCode(event.charCode) + ", ";
+    });
+  }
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div id="main" role="main" style="height:500px;">
+    <p id="code">type!</p>
+    <p id="msg"></p>
+    <input type="text" id="input">
+  </div>
+</body>
+
+----------リスト7-20
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    var dom = document.querySelector("#input");
+    dom.lastValue = "";
+    dom.value = "※ここに何か書いて";
+    dom.addEventListener("focus", funcF);
+    dom.addEventListener("blur", funcB);
+  }
+  function funcF(event){
+    event.target.value = event.target.lastValue;
+  }
+  function funcB(event){
+    event.target.lastValue = event.target.value
+    var dom = document.querySelector("#msg");
+    dom.innerHTML = event.target.value;
+    event.target.value = "※ここに何か書いて";
+  }
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div id="main" role="main">
+    <p id="msg">type text...</p>
+    <input type="text" id="input">
+  </div>
+</body>
+
+----------リスト7-21
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    var doms = document.querySelectorAll("div");
+    for(var i = 0;i < doms.length;i++){
+      var dom = doms[i];
+      dom.addEventListener("click", func);
+    }
+  }
+  function func(event){
+    alert("click!");
+    var f = document.querySelector("#check").checked;
+    if (f) event.stopPropagation();
+  }
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <p id="main" role="main">
+    <p>
+    <input type="checkbox" id="check">
+    <label for="check">propagate</label>
+    </p>
+    <div>
+      <div>
+        <div id="msg">sample message.</div>
+      </div>
+    </div>
+  </p>
+</body>
+
+----------リスト7-22
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    var form = document.querySelector("#form");
+    form.addEventListener("click", func);
+  }
+  function func(event){
+    var res = confirm("送信を取り消す？");
+    if (res) event.preventDefault();
+  }
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div id="main" role="main">
+    <form id="form" action="./index.html">
+      <input type="submit">
+    </form>
+  </div>
+</body>
+
+----------リスト7-23
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    var form = document.querySelector("#submit");
+    form.addEventListener("click", clickBtn);
+    var form = document.querySelector("#h1");
+    form.addEventListener("click", func);
+  }
+  function clickBtn(event){
+    var res = confirm("送信を取り消す？");
+    if (res) event.preventDefault();
+  }
+  function func(event){
+    var e = document.createEvent("MouseEvent");
+    e.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+    var dom = document.querySelector("#submit");
+    dom.dispatchEvent(e);
+  }
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div id="main" role="main">
+    <form action="./index.html">
+      <input type="submit" id="submit">
+    </form>
+  </div>
+</body>
+
+----------リスト7-24
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    var dom = document.querySelector("#area");
+    makeDrag(dom);
+    dom.addEventListener("drag",func);
+  }
+  function func(event){
+    var dom = document.querySelector("#msg");
+    dom.innerHTML = event.screenX + "," + event.screenY + event.shiftKey;
+  }
+  function makeDrag(dom){
+    dom.dragF = false;
+    dom.addEventListener("mousedown", function(event){
+      if (event.button == 0){
+        event.target.dragF = true;
+      } else {
+        event.target.dragF = false;
+      }
+    });
+    dom.addEventListener("mouseup", function(event){
+      event.target.dragF = false;
+    });
+    dom.addEventListener("mouseout", function(event){
+      event.target.dragF = false;
+    });
+    dom.addEventListener("mousemove", function(event){
+      if (!event.target.dragF) return;
+      var e = document.createEvent("MouseEvent");
+      e.initMouseEvent("drag", true, true, window, 0, 
+        event.clientX, event.clientY, event.screenX, event.screenY, event.ctrlKey, event.altKey, event.shiftKey, event.metaKey, 
+        event.button, null);
+      event.target.dispatchEvent(e);
+    });
+  }
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div id="main" role="main" style="height:500px;">
+    <p id="msg">click!</p>
+    <div id="area" style="background:#eee;height:300px"></div>
+  </div>
+</body>
+

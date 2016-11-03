@@ -1,0 +1,380 @@
+﻿----------リスト10-1
+<body>
+  <script src="http://code.jquery.com/jquery.min.js"></script>
+  <script type="text/javascript">
+  $(window).load(function(){
+    $("#msg").text("I'm jQuery!!");
+  });
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div role="main">
+    <p id="msg">this is sample page.</p>
+  </div>
+</body>
+
+----------リスト10-2
+<body>
+  <script src="http://code.jquery.com/jquery.min.js"></script>
+  <script type="text/javascript">
+  $(window).load(function(){
+    $("#btn").click(function(){
+      $("#link").attr("href",$("#val").val());
+      alert("リンク先を" + $("#val").val() + "に変更しました。");
+    });
+  });
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div role="main">
+    <p><a id="link" href="">this is test link.</a></p>
+    <p><input type="text" id="val"></p>
+    <p><button id="btn">click</button></p>
+  </div>
+</body>
+
+----------リスト10-3
+<body>
+  <script src="http://code.jquery.com/jquery.min.js"></script>
+  <script type="text/javascript">
+  $(window).load(function(){
+    $(".msg").text("I'm jQuery!!");
+    $(".msg2").each(function(index){
+      $(this).text("I'm No," + index);
+    });
+  });
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div role="main">
+    <p id="msg1" class="msg">this is sample page.</p>
+    <p id="msg2" class="msg">this is sample page.</p>
+    <p id="msg3" class="msg">this is sample page.</p>
+    <p id="msg4" class="msg2">this is sample page.</p>
+    <p id="msg5" class="msg2">this is sample page.</p>
+    <p id="msg6" class="msg2">this is sample page.</p>
+  </div>
+</body>
+
+----------リスト10-4
+<body>
+  <script src="http://code.jquery.com/jquery.min.js"></script>
+  <script type="text/javascript">
+  $(window).load(function(){
+    $("#btn").click(function(event){
+      alert("clicked!");
+    });;
+    $("#msg").dblclick(function(event){
+      alert("double clicked!");
+    });
+  });
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div role="main">
+    <p id="msg">this is sample</p>
+    <p><button id="btn">click"</button></p>
+  </div>
+</body>
+
+----------リスト10-5
+<body>
+  <script src="http://code.jquery.com/jquery.min.js"></script>
+  <script type="text/javascript">
+  $(window).load(function(){
+    $("#btn").click(function(event){
+      $("#msg").css({"color":"blue","background":"#FFAAAA"});
+    });
+  });
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div role="main">
+    <p id="msg">this is sample</p>
+    <p><button id="btn">click"</button></p>
+  </div>
+</body>
+
+----------リスト10-6
+<body>
+  <script src="http://code.jquery.com/jquery.min.js"></script>
+  <script type="text/javascript">
+  $(window).load(function(){
+    $("#btn").click(function(event){
+      var props = $("#msg").css(["width","height","background-color","color"]);
+      var res = "";
+      $.each(props, function(key,value){
+        res += key + "の値は、" + value + "\n";
+      });
+      alert(res);
+    });
+  });
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div role="main">
+    <p id="msg">this is sample</p>
+    <p><button id="btn">click</button></p>
+  </div>
+</body>
+
+----------リスト10-7
+<body>
+  <style>
+  .a { background:#FFAAAA; }
+  .b { color:red; }
+  .c { font-size: 24pt; }
+  .d { font-weight: bold; }
+  </style>
+  <script src="http://code.jquery.com/jquery.min.js"></script>
+  <script type="text/javascript">
+  $(window).load(function(){
+    $("#btn1").click(function(){
+      $("#msg").addClass($("#sel").val());
+    });
+    $("#btn2").click(function(){
+      $("#msg").removeClass($("#sel").val());
+    });
+  });
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div role="main">
+    <p id="msg">this is test page.</p>
+    <p><select id="sel">
+      <option value="a">A</option>
+      <option value="b">B</option>
+      <option value="c">C</option>
+      <option value="d">D</option>
+    </select></p>
+    <p><button id="btn1">add</button>
+      <button id="btn2">remove</button></p>
+  </div>
+</body>
+
+----------リスト10-8
+<body>
+  <script src="http://code.jquery.com/jquery.min.js"></script>
+  <script type="text/javascript">
+  $(window).load(function(){
+    $("#btn").click(function(event){
+      $("#msg").load("data.txt");
+    });
+  });
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div role="main">
+    <p id="msg">this is sample</p>
+    <p><button id="btn">click</button></p>
+  </div>
+</body>
+
+----------リスト10-9
+<?php
+$nm = $_POST["name"];
+$pw = $_POST["password"];
+echo "{\"name\":\"" . $nm . "\",\"password\":\"" . $pw . "\"}";
+flush();
+?>
+
+----------リスト10-10
+<body>
+  <script src="http://code.jquery.com/jquery.min.js"></script>
+  <script type="text/javascript">
+  $(window).load(function(){
+    $("#btn").click(function(event){
+      $("#msg").load("serversend.php",
+        {
+          name: $("#name").val(),
+          password: $("#pass").val()
+        },
+        function(result){
+          alert(result);
+        });
+    });
+  });
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div role="main">
+    <p id="msg">this is sample</p>
+    <p><input type="text" id="name"></p>
+    <p><input type="text" id="pass"></p>
+    <p><button id="btn">click</button></p>
+  </div>
+</body>
+
+----------リスト10-11
+<body>
+  <script src="http://code.jquery.com/jquery.min.js"></script>
+  <script type="text/javascript">
+  $(window).load(function(){
+    $("#btn").click(function(event){
+      $.getJSON("serversend.php",
+        {
+          name: $("#name").val(),
+          password: $("#pass").val()
+        },
+        function(result){
+          var res = result.name + ":" +
+            result.password;
+          alert(res);
+        });
+    });
+  });
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div role="main">
+    <p id="msg">this is sample</p>
+    <p><input type="text" id="name"></p>
+    <p><input type="text" id="pass"></p>
+    <p><button id="btn">click</button></p>
+  </div>
+</body>
+
+----------リスト10-12
+<body>
+  <script src="http://code.jquery.com/jquery.min.js"></script>
+  <script type="text/javascript">
+  $(window).load(function(){
+    $("#btn1").click(function(event){
+      var func = $("#func").val();
+      $("#msg").unbind();
+      $("#msg").bind($("#event").val(),
+      function(event){
+        var script = func;
+        eval(script);
+      });
+      alert("bindしました。");
+    });
+  });
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div role="main">
+    <p id="msg">this is sample</p>
+    <p>Event:<input type="text" id="event"></p>
+    <p>Script:<textarea id="func"></textarea></p>
+    <p><button id="btn1">bind</button></p>
+  </div>
+</body>
+
+----------リスト10-13
+$(window).load(function(){
+  $("#btn1").click(function(event){
+    var func = $("#func").val();
+    $("#msg").one($("#event").val(),
+    function(event){
+      var script = func;
+      eval(script);
+    });
+    alert("bindしました。");
+  });
+});
+
+----------リスト10-14
+<body>
+  <script src="http://code.jquery.com/jquery.min.js"></script>
+  <script type="text/javascript">
+  $(window).load(function(){
+    $("#btn").click(function(){
+      $("ol li").css("background","");
+      $("ol li").filter(function(){
+        return $(this).val() >= $("#input").val();
+      }).css("background","red");
+    });
+  });
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div role="main">
+    <p id="msg">this is sample</p>
+    <p><ol id="ol">
+      <li value="10">SAMPLE ITEM</li>
+      <li value="20">SAMPLE ITEM</li>
+      <li value="30">SAMPLE ITEM</li>
+      <li value="40">SAMPLE ITEM</li>
+      <li value="50">SAMPLE ITEM</li>
+      <li value="60">SAMPLE ITEM</li>
+      <li value="70">SAMPLE ITEM</li>
+      <li value="80">SAMPLE ITEM</li>
+      <li value="90">SAMPLE ITEM</li>
+      <li value="100">SAMPLE ITEM</li>
+    </ol></p>
+    <p><input type="text" id="input"></p>
+    <p><button id="btn">bind</button></p>
+  </div>
+</body>
+
+----------リスト10-15
+<body>
+  <script src="http://code.jquery.com/jquery.min.js"></script>
+  <script type="text/javascript">
+  $(window).load(function(){
+    $("#btn").click(function(){
+      $("#msg").wrap($("<div></div>")
+        .css({"margin":"5px","borderStyle":"solid"}));
+    });
+  });
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div role="main">
+    <p id="msg">this is sample</p>
+    <p><button id="btn">bind</button></p>
+  </div>
+</body>
+
+----------リスト10-16
+<body>
+  <script src="http://code.jquery.com/jquery.min.js"></script>
+  <script type="text/javascript">
+  $(window).load(function(){
+    $("#btn").click(function(){
+      $("#img").toggle(1000);
+    });
+  });
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div role="main">
+    <p><img  id="img" src="image.jpg"></p>
+    <p><button id="btn">bind</button></p>
+  </div>
+</body>
+
+----------リスト10-17
+<body>
+  <script src="http://code.jquery.com/jquery.min.js"></script>
+  <script type="text/javascript">
+  $(window).load(function(){
+    $("#btn").click(function(){
+      $("#img").fadeTo(1000,$("#num").val() / 100);
+    });
+  });
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div role="main">
+    <p id="img_wrap"><img id="img" src="image.jpg"></p>
+    <p><input type="number" id="num" min="0" max="100" value="50"></p>
+    <p><button id="btn">bind</button></p>
+  </div>
+</body>

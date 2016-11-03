@@ -1,0 +1,79 @@
+﻿@charset "UTF-8";
+
+
+
+#menu a:link {
+	color: #ffffff;
+	text-decoration: none;
+}
+#menu a:visited {
+	color: #ffffff;
+	text-decoration: none;
+}
+#menu a:hover {
+	color: #00ff00;
+	text-decoration: none;
+}
+#menu a:active {
+	color: #00ffff;
+	text-decoration: none;
+}
+
+div#math-left h2 {
+	width:120px;
+	height:43px;
+	padding:0px 0px 0px 40px;
+	margin: 0px 0px;
+	font-size:22px;
+	background-image:url(../images/menubtn001.png);
+	background-repeat:no-repeat;
+	background-color:#000033;
+	color:#ffffff;
+}
+
+div#math-left{
+	width: 160px;
+	margin: 10px 10px 10px 25px;
+	float:left;
+}
+
+div#math-left ul li{
+	list-style-type:none;
+}
+
+div#math-left ul a{
+	display:block;
+	height:35px;
+	padding:15px 0px 0px 30px;
+	text-decoration:none;
+	border-bottom:1px dotted gray;
+	background-image:url(../images/bar_blue_2.png);
+	background-repeat:no-repeat;
+	color:#333333;
+}
+
+div#math-left ul li:first-child a {
+	border-top:1px dotted gray;
+}
+
+div#math-left ul li a:hover	{
+	text-decoration:underline;	/*リンクにマウスが乗ったら下線を表示*/
+}
+
+div#math-right{
+	width: 760px;
+	margin: 0px 20px 0px 25px;
+	float:left;
+}
+
+h2{
+	font-size:16px;		/*文字サイズ*/
+	width:740px;		/*横幅*/
+	padding:10px 0px 10px 10px;	/*パディング*/
+	margin: 10px 0;
+	background-color:#009900;		/*背景色*/
+	color:#ffffff;		/*文字色*/
+	border-radius:3px;		/*角丸にする*/
+	-moz-border-radius:3px; -webkit-border-radius:3px; -o-border-radius:3px; -ms-border-radius:3px;		/*角丸にする（ベンダープレフィックス付きの指定）*/
+}
+

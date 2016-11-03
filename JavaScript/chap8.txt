@@ -1,0 +1,573 @@
+﻿----------リスト8-1
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    var dom = document.querySelector("#btn1");
+    dom.addEventListener("click",func);
+  }
+  function func(event){
+    var ctrls = document.forms["form1"];
+    for(var i = 0;i < ctrls.length;i++)
+      ctrls[i].value = i + ": " + ctrls[i].value;
+  }
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div id="main" role="main">
+    <form id="form1" name="form1">
+      <div><input type="text" id="text1" name="text1"></div>
+      <div><input type="text" id="text2" name="text2"></div>
+      <div><input type="text" id="text3" name="text3"></div>
+    </form>
+    <div><button id="btn1">click</button>
+  </div>
+</body>
+
+----------リスト8-2
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    var doms = document.querySelectorAll("input");
+    for(var i = 0;i < doms.length;i++)
+      doms[i].addEventListener("change",func);
+  }
+  function func(event){
+    var check = document.querySelector("#check1");
+    var radios = document.getElementsByName("radio1");
+    var radio = null;
+    for(var i = 0;i < radios.length;i++)
+      if (radios[i].checked)
+        radio = radios[i];
+    var res = check.checked ? "成人 " : "未成年 ";
+    res += radio != null ? radio.value : "(性別不明)";
+    var msg = document.querySelector("#msg");
+    msg.innerHTML = res;
+  }
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div id="main" role="main">
+    <p id="msg">please check!</p>
+    <form id="form1" name="form1">
+      <div>
+        <input type="checkbox" id="check1" name="check1">
+        <label for="check1">成人</label></div>
+      <div>
+        <input type="radio" id="r1" value="男性" name="radio1">
+        <label for="r1">男</label>
+        <input type="radio" id="r2" value="女性" name="radio1">
+        <label for="r2">女</label>
+      </div>
+    </form>
+  </div>
+</body>
+
+----------リスト8-3
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    var sel = document.querySelector("#select1");
+    sel.addEventListener("change",func);
+  }
+  function func(event){
+    var msg = document.querySelector("#msg");
+    msg.innerHTML = "SELECT: " +event.target.value;
+  }
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div id="main" role="main">
+    <p id="msg">please select!</p>
+    <form id="form1" name="form1">
+      <div>
+        <select id="select1">
+          <option value="Japan">日本</option>
+          <option value="U.S.A">米国</option>
+          <option value="U.K">英国</option>
+        </select>
+      </div>
+    </form>
+  </div>
+</body>
+
+----------リスト8-4
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    var sel = document.querySelector("#select1");
+    sel.addEventListener("change",func);
+  }
+  function func(event){
+    var opts = document.querySelector("#select1").options;
+    var res = "";
+    for(var i = 0;i < opts.length;i++)
+      if (opts[i].selected)
+        res += opts[i].value + " ";
+    var msg = document.querySelector("#msg");
+    msg.innerHTML = "SELECT: " + res;
+  }
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div id="main" role="main">
+    <p id="msg">please check!</p>
+    <form id="form1" name="form1">
+      <div>
+        <select id="select1" size="3" multiple>
+          <option value="Japan">日本</option>
+          <option value="U.S.A">米国</option>
+          <option value="U.K">英国</option>
+        </select>
+      </div>
+    </form>
+  </div>
+</body>
+
+----------リスト8-5
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    var inputs = document.querySelectorAll("input");
+    for(var i = 0;i < inputs.length;i++)
+      inputs[i].addEventListener("change",func);
+  }
+  function func(event){
+    var msg = document.querySelector("#msg");
+    if (event.target.checked)
+      addClassName(event.target.id,msg);
+    else
+      removeClassName(event.target.id,msg);
+  }
+  function addClassName(cname,dom){
+    var arr = dom.className.split(" ");
+    arr.push(cname);
+    dom.className = arr.join(" ").trim();
+  }
+  function removeClassName(cname,dom){
+    var arr = dom.className.split(" ");
+    for(var i = 0;i < arr.length;i++)
+      if (arr[i] == cname) arr[i] = null;
+    dom.className = arr.join(" ").trim();    
+  }
+  </script>
+  <style>
+  .a { background:#ffdddd; }
+  .b { font-size:24pt; }
+  .c { color:red; }
+  </style>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div id="main" role="main" style="height:500px;">
+    <p id="msg">This is class-modified sample!</p>
+    <div>
+      <input type="checkbox" id="a">
+      <label for="a">set background color.</label>
+    </div>
+    <div>
+      <input type="checkbox" id="b">
+      <label for="b">set font size.</label>
+    </div>
+    <div>
+      <input type="checkbox" id="c">
+      <label for="c">set text color.</label>
+    </div>
+  </div>
+</body>
+
+----------リスト8-6
+<body onload="init();">
+  <script type="text/javascript">
+  var dragF, dragDX, dragDY;
+  var dragX = 100;
+  var dragY = 100;
+  
+  function init(){
+    var dom = document.querySelector("#msg");
+    dom.addEventListener("mouseout", dragReset);
+    dom.addEventListener("mousemove", drag);
+    dom.addEventListener("mousedown", dragStart);
+    dom.addEventListener("mouseup", dragReset);
+  }
+  function dragStart(event){
+    if (event.button == 0){
+      dragF = true;
+      dragDX = event.clientX - dragX;
+      dragDY = event.clientY - dragY;
+    } else {
+      dragF = false;
+    }
+  }
+  function dragReset(event){
+    dragF = false;
+  }
+  function drag(event){
+    if (!dragF) return;
+    dragX = event.clientX - dragDX;
+    dragY = event.clientY - dragDY;
+    event.target.style.left = dragX + "px";
+    event.target.style.top = dragY + "px";
+    event.target.innerHTML = dragX + "," + dragY;
+  }
+  </script>
+  <style>
+  #msg {
+    position:absolute;
+    left:100px;
+    top:100px;
+    background:#ccc;
+    width:200px;
+    height:200px;
+  }
+  </style>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div id="main" role="main" style="height:500px;">
+    <p id="msg">click!</p>
+  </div>
+</body>
+
+----------リスト8-7
+// 16進数の文字列から10進数の配列に変換
+function to10from16(cstr){
+  var str = cstr.replace(/#/,'');
+  var red = parseInt(str.charAt(0) + str.charAt(2),16);
+  var green = parseInt(str.charAt(2) + str.charAt(2),16);
+  var blue  = parseInt(str.charAt(4) + str.charAt(2),16);
+  return [red,green,blue,alpha];
+}
+// 10進数の配列から16進数の文字列に変換
+function to16from10(carr){
+  return '#' + 
+    carr[0].toString(16) + 
+    carr[1].toString(16) +
+    carr[2].toString(16);
+}
+// RGB関数の文字列から10進数の配列に変換
+function to10fromRGB(cstr){
+  var str = cstr.replace('rgb','');
+  str = str.replace('(','');
+  str = str.replace(')','');
+  return str.split(',');  
+}
+// 10進数の配列からRGB関数の文字列に変換
+function toRGBfrom10(carr){
+  return 'rgb(' + 
+    carr[0] + ',' +
+    carr[1] + ',' +
+    carr[2] + ')';
+}
+
+----------リスト8-8
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    var dom = document.querySelector("#msg");
+    dom.addEventListener("click", func);
+  }
+  function func(event){
+    var bg = event.target.style.backgroundColor;
+    var bgarr = to10fromRGB(bg);
+    bgarr[0] -= 16;
+    bgarr[2] += 16;
+    var re = toRGBfrom10(bgarr);
+    event.target.style.backgroundColor = toRGBfrom10(bgarr);
+  }
+
+  function to10fromRGB(cstr){ ……略…… }
+  function toRGBfrom10(carr){ ……略…… }
+
+  </script>
+  <style title="style1">
+  .a { background:#FFCCCC; color:red; }
+  .b { background:#000099; color:white; }
+  </style>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div id="main" role="main" style="height:500px;">
+    <p id="msg" style="background-color:#ff0000;">this is sample text!</p>
+  </div>
+</body>
+
+----------リスト8-9
+<body onload="init();">
+  <script type="text/javascript">
+  var flg = 0;
+
+  function init(){
+    var dom = document.querySelector("#msg");
+    dom.addEventListener("click", func);
+  }
+  function func(event){
+    var styles = document.styleSheets;
+    var style = null;
+    for(var i = 0;i < styles.length;i++)
+      if (styles[i].title = "style1")
+        style = styles[i].cssRules;
+    if (style != null){
+      var style = styles[1].cssRules;
+      flg = flg == 0 ? 1 : 0;
+      var css = style[flg];
+      event.target.style.background = css.style.background;
+      event.target.style.color = css.style.color;
+    }
+  }
+  </script>
+  <style title="style1">
+  .a { background:#FFCCCC; color:red; }
+  .b { background:#000099; color:white; }
+  </style>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div id="main" role="main">
+    <p id="msg">click!</p>
+  </div>
+</body>
+
+----------リスト8-10
+<body onload="init();">
+  <script type="text/javascript">
+
+  function init(){
+    var dom = document.querySelector("#msg");
+    dom.addEventListener("click", func);
+  }
+  function func(event){
+    var res = prompt("type text:");
+    var dom = document.createElement("li");
+    dom.textContent = res;
+    event.target.appendChild(dom);
+  }
+  </script>
+
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div id="main" role="main">
+    <ol id="msg">*this is sample List*</ol>
+  </div>
+</body>
+
+----------リスト8-11
+<body onload="init();">
+  <script type="text/javascript">
+
+  function init(){
+    var dom = document.querySelector("#msg");
+    dom.addEventListener("click", func);
+  }
+  function func(event){
+    var msg = document.querySelector("#msg");
+    var id = msg.parentElement.id;
+    msg.parentElement.removeChild(msg);
+    if (id == "main"){
+      var head = document.querySelector("#head");
+      head.appendChild(msg);
+    } else {
+      var main = document.querySelector("#main");
+      main.appendChild(msg);
+    }
+  }
+  </script>
+  <style>
+  .rect {
+    border:1px solid #DDDDDD;
+    margin:5px;
+    height:100px;
+  }
+  </style>
+  <header id="head" class="rect">
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div id="main" role="main" class="rect">
+    <p id="msg" style="background:#DDFFDD;">*this is sample List*</p>
+  </div>
+</body>
+
+----------リスト8-12
+<body onload="init();">
+  <script type="text/javascript">
+  var lastitem = null;
+
+  function init(){
+    var dom = document.querySelector("#msg");
+    dom.addEventListener("click", func);
+  }
+  function func(event){
+    var str = prompt("input text:");
+    if (str == null) return;
+    var dom = document.createElement("li");
+    dom.textContent = str;
+    dom.addEventListener("click",funcItem);
+    if (lastitem == null)
+      event.target.appendChild(dom);
+    else
+      event.target.insertBefore(dom,lastitem);
+  }
+  function funcItem(event){
+    if (lastitem == event.target){
+      lastitem.className = '';
+      lastitem = null;
+    } else {
+      if (lastitem != null)
+        lastitem.className = '';
+      lastitem = event.target;
+      lastitem.className = 'selitem';
+    }
+    event.stopPropagation();
+  }
+  </script>
+  <style>
+  .selitem { background:#DDFFDD; }
+  </style>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div id="main" role="main">
+    <ol id="msg">*this is sample List*</ol>
+  </div>
+</body>
+
+----------リスト8-13
+<body onload="init();">
+  <script type="text/javascript">
+
+  function init(){
+    var dom = document.querySelector("#btn");
+    dom.addEventListener("click", func);
+  }
+  function func(event){
+    var doc = document.createDocumentFragment();
+    var data = document.querySelector("#area").value;
+    var arr = data.split(/[\r\n]+/);
+    for(var n in arr){
+      var dom = document.createElement("li");
+      dom.textContent = arr[n];
+      doc.appendChild(dom);
+    }
+    var dom = document.querySelector("#msg");
+    dom.appendChild(doc);
+  }
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div id="main" role="main" style="height:500px;">
+    <ol id="msg">*this is sample List*</ol>
+    <div>
+      <textarea id="area" rows="3"></textarea>
+      <button id="btn">add items</button>
+    </div>
+  </div>
+</body>
+
+----------リスト8-14
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    var doms = document.querySelectorAll("p.layer");
+    for(var i = 0;i < doms.length;i++){
+      doms[i].style.width = 100 + "px";
+      doms[i].style.height = 100 + "px";
+      doms[i].style.left = (100 + i * 25) + "px";
+      doms[i].style.top = (100 + i * 25) + "px";
+      doms[i].style.backgroundColor = "rgb(" + 
+        (100 * i) + ",200," + (255 - 150 * i) +")";
+      doms[i].addEventListener("click", func);
+    }
+  }
+  function func(event){
+    var doms = document.getElementsByName("r");
+    for(var i = 0;i < doms.length;i++){
+      doms[i].style.zIndex = 0;
+    }
+    event.target.style.zIndex = 100;
+  }
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div id="main" role="main">
+    <p class="layer" style="position:absolute;">r1</p>
+    <p class="layer" style="position:absolute;">r2</p>
+    <p class="layer" style="position:absolute;">r3</p>
+  </div>
+</body>
+
+----------リスト8-15
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta http-equiv="content-type" 
+    content="text/html; charset=UTF-8">
+  <title>inline page</title>
+</head>
+
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    var dom = document.querySelector("#btn");
+    dom.addEventListener('click',func);
+  }
+  function func(event){
+    var val = document.querySelector('#text1').value;
+    var msg = parent.document.querySelector('#msg');
+    msg.textContent = val;
+  }
+  </script>
+  <header>
+    <h2 id="h1">Inline Page</h2>
+  </header>
+  <div role="main">
+    <p id="msg">this is inline page!!</P>
+    <p><input type="text" id="text1">
+    <button id="btn">click</button></p>
+  </div>
+</body>
+</html>
+
+----------リスト8-16
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta http-equiv="content-type" 
+    content="text/html; charset=UTF-8">
+  <title>sample</title>
+  <style>
+  body { font-size:12pt; color:#000066; }
+  h1 { font-size:18pt; background-color:#DDDDFF; }
+  pre { background-color:#EEEEEE; }
+  </style>
+</head>
+
+<body onload="init();">
+  <script type="text/javascript">
+  function init(){
+    var dom = document.querySelector("#btn");
+    dom.addEventListener('click',func);
+  }
+  function func(event){
+    var val = document.querySelector('#text1').value;
+    var iframe = document.querySelector('#frame');
+    var msg = iframe.contentWindow.document.querySelector('#msg');
+    msg.textContent = val;
+  }
+  </script>
+  <header>
+    <h1 id="h1">Sample Page</h1>
+  </header>
+  <div role="main">
+    <p id="msg">this is inline frame test.</p>
+    <p><iframe id="frame" src="iframe.html"></iframe></p>
+    <p><input type="text" id="text1">
+    <button id="btn">click</button></p>
+  </div>
+</body>
+</html>

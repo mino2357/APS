@@ -1,0 +1,61 @@
+\documentclass[11pt,a4paper]{jsarticle}
+
+\usepackage[top=30truemm,bottom=30truemm,left=20truemm,right=15truemm]{geometry}
+
+%
+\usepackage{amsmath,amssymb}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{ascmac}
+\usepackage{fancybox,ascmac}
+\usepackage{amsthm}
+%
+
+\addtolength{\textheight}{\topskip}
+\setlength{\voffset}{-0.5in}
+\setlength{\headsep}{0.3in}
+
+
+
+%
+\newcommand{\divergence}{\mathrm{div}\,}  %ダイバージェンス
+\newcommand{\grad}{\mathrm{grad}\,}  %グラディエント
+\newcommand{\rot}{\mathrm{rot}\,}  %ローテーション
+%
+%\pagestyle{myheadings}
+\pagestyle{empty}
+
+\begin{document}
+
+\section{二次方程式の解法}
+\subsection{問題}
+二次方程式$ax^2 + bx +c = 0 \hspace{3mm} (a > 0)$の解は以下の式で与えられることを示せ．
+\begin{eqnarray*}
+x  &=& \frac{-b \pm \sqrt{\mathstrut b^2-4ac}}{2a}
+\end{eqnarray*}
+\subsection{証明}
+以下の式はすべて同値．
+\begin{eqnarray*}
+ax^2 + bx +c &=& 0 \hspace{15mm}    (a >0) \\
+a \Bigl(x^2 + \frac{b}{a}x \Bigl) +c &=& 0 \\
+a\Bigl\{ \Bigl(x +\frac{b}{2a}\Bigl)^2 - \Bigl(\frac{b}{2a}\Bigl)^2\Bigl\} + c &=& 0 \\
+a \Bigl(x +\frac{b}{2a}\Bigl)^2 - \frac{b^2}{4a} +c &=& 0 \\
+a \Bigl(x +\frac{b}{2a}\Bigl)^2  &=& \frac{b^2}{4a} -c \\
+a \Bigl(x +\frac{b}{2a}\Bigl)^2  &=& \frac{b^2-4ac}{4a} \\
+\Bigl(x +\frac{b}{2a}\Bigl)^2  &=& \frac{b^2-4ac}{4a^2} \\
+x +\frac{b}{2a}  &=& \pm \sqrt{\mathstrut \frac{b^2-4ac}{4a^2} }  \\
+x  &=& -\frac{b}{2a} \pm \frac{\sqrt{\mathstrut b^2-4ac}}{ \sqrt{ 4a^2}} \\
+x  &=& -\frac{b}{2a} \pm \frac{\sqrt{\mathstrut b^2-4ac}}{ |2a|} \\
+x  &=& -\frac{b}{2a} \pm \frac{\sqrt{\mathstrut b^2-4ac}}{2a} \\
+x  &=& \frac{-b \pm \sqrt{\mathstrut b^2-4ac}}{2a}　\qed
+\end{eqnarray*}
+
+
+\begin{eqnarray*}
+\frac{ac-bd}{c^2+d^2}-\frac{ad-bc}{c^2+d^2}i \\
+\alpha +\beta &=& -\frac{b}{a} \\
+\alpha \beta &=& \frac{c}{a} \\
+\mathbb{Q}(\sqrt{2})
+\end{eqnarray*}
+
+\end{document}

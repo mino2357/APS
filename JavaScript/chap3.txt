@@ -1,0 +1,229 @@
+﻿----------リスト3-1
+var n = 12345;
+document.write(isPrime(n) ? "素数です。" : "素数じゃないよ。");
+
+function isPrime(num){……略……}
+
+----------リスト3-2
+var n = 12;
+if (n >= 5 && n <= 10)
+  document.write("5~10の範囲内です。");
+else
+  document.write("範囲外です。");
+
+----------リスト3-3
+var s1 = "10110";
+var s2 = "01110";
+var n1 = parseInt(s1,2);
+var n2 = parseInt(s2,2);
+document.write((n1 & n2).toString(2));
+document.write("<br>");
+document.write((n1 | n2).toString(2));
+document.write("<br>");
+document.write((n1 << 1).toString(2));
+document.write("<br>");
+document.write((n1 >> 1).toString(2));
+document.write("<br>");
+
+----------リスト3-4
+a = b = 10;
+document.write(++a + ":" + b++);
+
+----------リスト3-5
+<script type="text/javascript">
+str = "Hello";
+document.write(str);
+var str = 12345;
+document.write(str);
+</script>
+
+----------リスト3-6
+<script type="text/javascript">
+"use strict";
+str = "Hello";
+document.write(str);
+</script>
+
+----------リスト3-7
+document.write("答え：");
+document.write(num); // numが答え
+
+----------リスト3-8
+document.write("答え：" + num);
+
+----------リスト3-9
+var n1 = 123;
+var n2 = "456";
+document.write(n1 + n2);
+
+----------リスト3-10
+var n = 7;
+if (0 < n < 10)
+  document.write(n + "は範囲内です。");
+else
+  document.write(n + "は範囲外です。");
+
+----------リスト3-11
+var val = "123";
+document.write(val + ":");
+switch(typeof val){
+  case "string":
+  document.write("テキストです。");
+  break;
+  case "number":
+  document.write("数字です。");
+  break;
+  case "boolean":
+  document.write("真偽値です。");
+  break;
+  default:
+  document.write("その他の型です。");
+  break;
+}
+
+----------リスト3-12
+for(var i = 0;i < 10;i++){
+  continue;
+}
+document.write(i);
+
+----------リスト3-13
+var str = "太郎";
+message(str);
+document.write(str);
+
+function message(msg){
+  var str = "Hello, " + msg;
+  alert(str);
+}
+
+----------リスト3-14
+var str = "太郎";
+message(str);
+
+function message(msg){
+  document.write("前：" +str);
+  var str2 = "Hello, " + msg;
+  document.write("、後：" + str2);
+}
+
+----------リスト3-15
+var str = "太郎";
+message(str);
+
+function message(msg){
+  document.write("前：" +str);
+  var str = "Hello, " + msg;
+  document.write("、後：" + str);
+}
+
+----------リスト3-16
+var str = "太郎";
+message(str);
+document.write(str);
+
+function message(msg){
+  str = "Hello, " + msg;
+  alert(str);
+}
+
+----------リスト3-17
+message("花子");
+document.write(str);
+
+function message(msg){
+  str = "Hello, " + msg;
+  alert(str);
+}
+
+----------リスト3-18
+var func = message;
+func("花子");
+
+function message(msg){
+  var str = "Hello, " + msg;
+  document.write(str);
+}
+
+----------リスト3-19
+var func = function(msg){
+  var str = "Hello, " + msg;
+  document.write(str);
+}
+
+func("花子");
+
+----------リスト3-20
+document.write(getAllPrime(100));
+
+function getAllPrime(max){
+  var result = "prime:";
+  for(var i = 2;i <= max;i++){
+    if (isPrime(i)) result += " " + i;
+  }
+  return result;
+  
+  function isPrime(n){
+    for(var i = 2;i < n;i++){
+      if (n % i == 0) return false;
+    }
+    return true;
+  }
+}
+
+----------リスト3-21
+var result = isOdd();
+document.write(result);
+
+function isOdd(n){
+  return n % 2 == 0 ? false : true;
+}
+
+----------リスト3-22
+function isOdd(n){
+  if (n == null || (typeof n) != "number") return undefined;
+  return n % 2 == 0 ? false : true;
+}
+
+----------リスト3-23
+var result = average(90,80,65,72,59);
+document.write(result);
+
+function average(){
+  var total = 0;
+  for(var item in arguments)
+    total += arguments[item];
+  return total / arguments.length;
+}
+
+----------リスト3-24
+var result = gcd(1230,456);
+document.write(result);
+
+function gcd(a, b){
+  var x = a > b ? a : b;
+  var y = a > b ? b : a;
+  if (y == 0)
+    return a;
+  else
+    return gcd(y, x % y);
+}
+
+----------リスト3-25
+var data = [1,2,3,4,5];
+var add = function(a, b){
+  return a + b;
+}
+var multiple = function(a, b){
+  return a * b;
+}
+
+document.write(" add:" + calc(data, add));
+document.write(" multiple:" + calc(data, multiple));
+
+function calc(num, func){
+  var total = num[0];
+  for(var i = 1;i < num.length;i++)
+    total = func(total,num[i]);
+  return total;
+}

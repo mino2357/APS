@@ -1,0 +1,333 @@
+----------リスト6-1
+for(var i = 0;i < 10;i++){
+        document.write(getRandom(100) + ", ");
+}
+
+function getRandom(max){
+        return  Math.floor(Math.random() * max);
+}
+
+----------リスト6-2
+var max = Math.max(25, 42, 68, 19, 83);
+document.write(max);
+
+----------リスト6-3
+var arr = [];
+for(var i = 0;i < 10;i++){
+        arr[i] = Math.floor(Math.random() * 100);
+}
+
+var max = Math.max.apply(null,arr);
+var min = Math.min.apply(null,arr);
+document.write("Max:" + max + ", min:" + min + "<br>");
+document.write("[" + arr + "]");
+
+----------リスト6-4
+document.write("<pre>");
+for(var i = 0;i < 10;i++){
+        var n = Math.random() * 10000;
+        document.write(n + "\t");
+        document.write(getRound(n,2) + "\t");
+        document.write(getRound(n,-2) + "<br>");
+}
+document.write("</pre>");
+
+function getRound(n,d){
+        return Math.round(n * Math.pow(10,d)) / Math.pow(10,d);
+}
+
+----------リスト6-5
+var x = 100;
+var y = 200;
+document.write(x.toString() + y.toString());
+
+----------リスト6-6
+document.write("<pre>");
+for(var i = 0;i < 10;i++){
+        var n = Math.random() * Math.pow(10,7);
+        document.write(n + "\t");
+        document.write(n.toExponential(5) + "\t");
+        document.write(n.toFixed(5) + "\t");
+        document.write(n.toPrecision(10) + "<br>");
+}
+document.write("</pre>");
+
+----------リスト6-7
+var str = "Welcome to JavaScript";        // いろいろ変えてみる
+
+var str2 = str.toUpperCase();
+var max = str2.length + 10;
+for(var i = 0;i < str2.length;i++){
+        document.write('<span style="font-size:' 
+                + max-- + 'pt">' + str2.charAt(i) 
+                + "</span>");
+}
+
+----------リスト6-8
+var str = "瓜売りが瓜売りに来て瓜売り残し瓜売り帰る瓜売りの声";
+var find = "瓜";
+var rep = "スイカ";
+var result = "";
+while(true){
+        var p = str.indexOf(find);
+        if (p == -1) break;
+        result += str.substring(0, p) + rep;
+        str = str.substring(p + find.length);
+}
+result += str;
+document.write(result);
+
+----------リスト6-9
+var str = "月々に月見る月は多けれど月見る月はこの月の月"; // いろいろ変えてみる
+var fstr = "月";
+var rep = "日";
+document.write(str);
+document.write("<br>");
+while(true){
+        if (str.search(fstr) == -1)
+                break;
+        str = str.replace(fstr,rep);
+}
+document.write(str);
+
+----------リスト6-10
+var str = "今日はJavaScriptを勉強します。";
+var fstr = /JavaScript/i;
+var rep = "ジャバスクリプト";
+
+document.write(str + "<br>");
+str = str.replace(fstr,rep);
+document.write(str);
+
+----------リスト6-11
+var str = "今日は1時30分から2.5時間の予定で打ち合わせがあります。";
+var fstr = /[0-9.]+/g;
+var rep = "*";
+str = str.replace(fstr,rep);
+
+document.write("<p>" + str + "</p>");
+str = str.replace(fstr,rep);
+document.write("<p>" + str + "</p>");
+
+----------リスト6-12
+var str = "千葉まで25km、東京まで50kmあります。";
+var fstr = /([0-9]+)(km)/ig;
+var rep = "[$1キロメートル]";
+
+document.write("<p>" + str + "</p>");
+str = str.replace(fstr,rep);
+document.write("<p>" + str + "</p>");
+
+----------リスト6-13
+var str = "私のメールアドレスはsyoda@tuyano.comです。";
+var fstr = /([\w.]+@[\w.]+)/g;
+var rep = ' "$1" ';
+
+document.write("<p>" + str + "</p>");
+str = str.replace(fstr,rep);
+document.write("<p>" + str + "</p>");
+
+----------リスト6-14
+var data = [];
+for(var i = 0;i < 100;i++){
+        var n = Math.floor(Math.random() * 10);
+        data[i] = n == 0 ? "○" : "?";
+}
+
+var hit = "";
+var start = 0;
+while(true){
+        if (data.indexOf("○",start) == -1){
+                break;
+        } else {
+                var n  = data.indexOf("○",start);
+                hit += n  + " ";
+                start = n + 1;
+        }
+}
+
+document.write("HIT:" + hit + "<br>");
+document.write("data: [" + data + "]");
+
+----------リスト6-15
+var data = ["東京","横浜","大阪","神戸","京都","福岡","仙台","札幌"];
+var arr = [];
+for(var i = 0;i < 10;i++){
+        var n = Math.floor(Math.random() * 3) + 1;
+        for(var j = 0;j < n;j++){
+                arr.push(getItem());
+                document.write(arr + "<br>");
+        }
+        n = Math.floor(Math.random() * 4);
+        for(var j = 0;j < n;j++){
+                arr.pop();
+                document.write(arr + "<br>");
+        }
+}
+
+function getItem(){
+        var putitem = Math.floor(Math.random() * data.length);
+        return data[putitem];
+}
+
+----------リスト6-16
+var data = ["東京","横浜","大阪","神戸","京都","福岡","仙台","札幌"];
+var arr = [];
+for(var i = 0;i < 10;i++){
+        var n = Math.floor(Math.random() * 3) + 1;
+        for(var j = 0;j < n;j++){
+                arr.unshift(getItem());
+                document.write(arr + "<br>");
+        }
+        n = Math.floor(Math.random() * 4);
+        for(var j = 0;j < n;j++){
+                arr.shift();
+                document.write(arr + "<br>");
+        }
+}
+
+function getItem(){……略……}
+
+----------リスト6-17
+var data = ["●","○","▲","△","■","□"];
+var arr = [];
+for(var i = 0;i < 10;i++){
+        arr.push(getItem());
+}
+document.write(arr + "<br>");
+for(var i = 0;i < 10;i++){
+        arr.push(getItem());
+        arr.shift();
+        document.write(arr + "<br>");
+}
+
+function getItem(){……略……}
+
+----------リスト6-18
+var data = ["Hello","Welcome","Hi","Yes!","Bye","w"];
+document.write("Data:  " + data + "<br>");
+data.sort();
+document.write("Sort1: " + data + "<br>")
+data.sort(compare);
+document.write("Sort2: " + data);
+
+function compare(first, second){
+        return first.length >= second.length ? 1 : -1;
+}
+
+----------リスト6-19
+var data = [];
+for(var i = 0;i < 10;i++){
+        data[i] = Math.floor(Math.random() * 10);
+}
+
+if (data.every(checkFunc))
+        document.write("ゼロはありません。<br>");
+else
+        document.write("ゼロがあります。<br>");
+document.write(data);
+
+function checkFunc(value, index, ar) {
+    if (value != 0) return true;
+}
+
+----------リスト6-20
+Array.prototype.average = function(){
+        var total = 0;
+        for(var i = 0;i < this.length;i++){
+                total += this[i];
+        }
+        return total / this.length;
+}
+
+var data = [];
+for(var i = 0;i < 10;i++){
+        data[i] = Math.floor(Math.random() * 100);
+}
+var ave = data.average();
+
+var result = data.filter(checkFunc);
+document.write("ave:" + ave + "<br>");
+document.write("result:" + result);
+
+function checkFunc(value, index, ar) {
+        if (value > ave)
+                return true;
+        else
+                return false;
+}
+
+----------リスト6-21
+Array.prototype.average = function(){……略……} // 前回に同じ
+
+// データの用意
+var data = [];
+for(var i = 0;i < 10;i++){
+        data[i] = Math.floor(Math.random() * 100);
+}
+var ave = data.average();
+
+var sbdata = data.map(calcSb);
+var sqdata = sbdata.map(calcPw);
+var dev = Math.sqrt(sqdata.average(), 2);
+var hensachi = sbdata.map(calcDv);
+
+document.write("得点：" + data + "<br>");
+document.write("平均：" + ave + "<br>");
+document.write("偏差値：" + hensachi);
+
+// map用関数
+function calcSb(value, index, ar) {
+        return (value - ave);
+}
+function calcPw(value, index, ar) {
+        return Math.pow(value, 2);
+}
+function calcDv(value, index, ar) {
+        return Math.floor(value * 10 / dev) + 50;
+}
+
+----------リスト6-22
+var data = [];
+for(var i = 0;i < 10;i++){
+        data[i] = Math.floor(Math.random() * 100);
+}
+var total = data.reduce(calcTotal, 0);
+
+document.write("得点：" + data + "<br>");
+document.write("合計：" + total);
+
+function calcTotal(prevalue, value, index, ar) {
+        return prevalue + value;
+}
+
+----------リスト6-23
+var d = new Date();
+d.setDate(d.getDate() + 1000);
+var res = d.getFullYear() + "年" +
+        (d.getMonth() + 1) + "月" +
+        d.getDate() + "日"
+document.write("今日から1000日後は、" + res + "です。");
+
+----------リスト6-24
+var d1 = new Date();
+d1.setHours(0);
+d1.setMinutes(0);
+d1.setSeconds(0);
+d1.setMilliseconds(0);
+var d2 = new Date(2001,1,1);
+var ms1 = d1.getTime();
+var ms2 = d2.getTime();
+var res = (d1 - d2) / (60 * 60 * 24 * 1000);
+document.write("2001年元旦から今日までは、" + res + "日あります。");
+
+----------リスト6-25
+var n1 = Math.floor(Math.random() * Math.pow(10,12));
+var n2 = Math.floor(Math.random() * Math.pow(10,12));
+var d1 = new Date(n1);
+var d2 = new Date(n2);
+document.write(d1 + "<br>");
+document.write(d2 + "<br>");
+document.write(d1.getTime() < d2.getTime() ?
+        "前者が早い" : "後者が早い");
+
